@@ -7,7 +7,6 @@ import java.util.List;
 import com.chess.engine.Alliance;
 import com.chess.engine.board.Board;
 import com.chess.engine.board.BoardUtils;
-import static com.chess.engine.board.Move.*;
 
 import com.chess.engine.board.Move;
 import com.chess.engine.board.Tile;
@@ -43,7 +42,7 @@ public final class Knight extends Piece {
             }
                 final Tile candidateDestinationTile = board.getTile(candidateDestinationCoordinate);
                  if(!candidateDestinationTile.isTileOccupied()) {
-                     legalMoves.add(new MajorMove(board, this, candidateDestinationCoordinate));
+                     legalMoves.add(new Move.MajorMove(board, this, candidateDestinationCoordinate));
                  }
                  else {
                      final Piece pieceAtDestination = candidateDestinationTile.getPiece();
@@ -51,7 +50,7 @@ public final class Knight extends Piece {
 
                      // If this is true then we'd know that piece is enemy piece.
                      if(this.pieceAlliance != pieceAlliance) {
-                         legalMoves.add(new AttackMove(board, this, candidateDestinationCoordinate,
+                         legalMoves.add(new Move.AttackMove(board, this, candidateDestinationCoordinate,
                              pieceAtDestination));
                      }
                  }

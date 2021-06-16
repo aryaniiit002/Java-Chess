@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class BoardUtils {
+public final class BoardUtils {
 
     /**
      * Intialize and keep track of a particular column in our chessBoard and we this for example in knight class
