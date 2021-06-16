@@ -6,6 +6,7 @@
  */
 
 package com.chess.engine.board;
+
 import com.chess.engine.pieces.Piece;
 import com.google.common.collect.ImmutableMap;
 
@@ -19,7 +20,7 @@ abstract class Tile {
     public static final int INT = 64;
     private final int tileCoordinate;
 
-    private static final Map<Integer, EmptyTile> EMPTY_TILES = createAllPossibleEmptyTiles();
+    private static final Map<Integer, EmptyTile> EMPTY_TILES_CACHE = createAllPossibleEmptyTiles();
 
     private static Map<Integer, EmptyTile> createAllPossibleEmptyTiles() {
         final Map<Integer, EmptyTile> emptyTileMap = new HashMap<>();
@@ -28,6 +29,8 @@ abstract class Tile {
             emptyTileMap.put(i, new EmptyTile(i));
         }
         // This ImmutableMap is a part of guava library, which is 3rd party lib provided by google.
+        // We can also use Collectins.unmodifiableMap().
+        // Guava is less error-prone.
         return ImmutableMap.copyOf(emptyTileMap);
     }
 
@@ -35,7 +38,7 @@ abstract class Tile {
         if (piece != null) {
             return new OccupiedTile(tileCoordinate, piece);
         }
-        return EMPTY_TILES.get(tileCoordinate);
+        return EMPTY_TILES_CACHE.get(tileCoordinate);
     }
     private Tile(int tileCoordinate) {
         this.tileCoordinate = tileCoordinate;
@@ -67,7 +70,7 @@ abstract class Tile {
     public static final class OccupiedTile extends Tile {
         private Piece pieceOnTile;
 
-        OccupiedTile(int tileCoordinate , Piece pieceOnTile){
+        private OccupiedTile(int tileCoordinate , Piece pieceOnTile){
             super(tileCoordinate);
             this.pieceOnTile = pieceOnTile;
         }
