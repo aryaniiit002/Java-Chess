@@ -16,7 +16,7 @@ import java.util.Map;
  * We make this class abstract and we can't instantiate this class but we can instantiate concrete
  * subclasses.
  */
-abstract class Tile {
+public abstract class Tile {
     public static final int INT = 64;
     private final int tileCoordinate;
 
