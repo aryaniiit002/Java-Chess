@@ -17,7 +17,6 @@ import java.util.Map;
  * subclasses.
  */
 public abstract class Tile {
-    public static final int INT = 64;
     private final int tileCoordinate;
 
     private static final Map<Integer, EmptyTile> EMPTY_TILES_CACHE = createAllPossibleEmptyTiles();
@@ -25,7 +24,7 @@ public abstract class Tile {
     private static Map<Integer, EmptyTile> createAllPossibleEmptyTiles() {
         final Map<Integer, EmptyTile> emptyTileMap = new HashMap<>();
 
-        for(int i = 0; i < INT; i++){
+        for(int i = 0; i < BoardUtils.NUM_TILES; i++){
             emptyTileMap.put(i, new EmptyTile(i));
         }
         // This ImmutableMap is a part of guava library, which is 3rd party lib provided by google.
@@ -40,7 +39,7 @@ public abstract class Tile {
         }
         return EMPTY_TILES_CACHE.get(tileCoordinate);
     }
-    private Tile(int tileCoordinate) {
+    private Tile(final int tileCoordinate) {
         this.tileCoordinate = tileCoordinate;
     }
 
@@ -70,7 +69,7 @@ public abstract class Tile {
     public static final class OccupiedTile extends Tile {
         private Piece pieceOnTile;
 
-        private OccupiedTile(int tileCoordinate , Piece pieceOnTile){
+        private OccupiedTile(int tileCoordinate , final Piece pieceOnTile){
             super(tileCoordinate);
             this.pieceOnTile = pieceOnTile;
         }

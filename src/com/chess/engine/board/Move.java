@@ -1,4 +1,49 @@
 package com.chess.engine.board;
 
-public class Move {
+import com.chess.engine.pieces.Piece;
+
+public abstract class Move {
+    private final Board board;
+    private final int destinationCoordinate;
+    private final Piece movedPiece;
+
+    private Move(final Board board,
+                 final Piece pieceMoved,
+                 final int destinationCoordinate) {
+        this.board = board;
+        this.destinationCoordinate = destinationCoordinate;
+        this.movedPiece = pieceMoved;
+    }
+
+    private Move(final Board board,
+                 final int destinationCoordinate) {
+        this.board = board;
+        this.destinationCoordinate = destinationCoordinate;
+        this.movedPiece = null;
+    }
+
+    public static final class MajorMove extends Move {
+
+        public MajorMove(final Board board,
+                               final Piece pieceMoved,
+                               final int destinationCoordinate) {
+            super(board, pieceMoved, destinationCoordinate);
+        }
+    }
+
+    public static final class AttackMove extends Move {
+
+        private final Piece attackedPiece;
+        public AttackMove(final Board board,
+                               final Piece pieceMoved,
+                               final int destinationCoordinate,
+                          final Piece attackedPiece) {
+            super(board, pieceMoved, destinationCoordinate);
+            this.attackedPiece = attackedPiece;
+        }
+
+        public Piece getAttackedPiece() {
+            return attackedPiece;
+        }
+    }
 }
