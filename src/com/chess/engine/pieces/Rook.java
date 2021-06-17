@@ -12,8 +12,8 @@ import com.chess.engine.board.Tile;
 import com.google.common.collect.ImmutableList;
 
 public class Rook extends Piece{
-    Rook(int piecePossition, Alliance pieceAlliance) {
-        super(piecePossition, pieceAlliance);
+    public Rook(final Alliance pieceAlliance, final int piecePossition) {
+        super(piecePossition, pieceAlliance, true);
     }
 
     private static final int[] CANDIDATE_MOVE_COORDINATES = { -8, -1, 1, 8 };
@@ -23,7 +23,7 @@ public class Rook extends Piece{
         final List<Move> legalMoves = new ArrayList<>();
 
         for (final int currentCandidateOffset : CANDIDATE_MOVE_COORDINATES) {
-            int candidateDestinationCoordinate = this.piecePosition;
+            int candidateDestinationCoordinate = this.getPiecePosition();
             while (BoardUtils.isValidTileCoordinate(candidateDestinationCoordinate)) {
                 if (isFirstColumnExclusion(currentCandidateOffset, candidateDestinationCoordinate) ||
                     isEighthColumnExclusion(currentCandidateOffset, candidateDestinationCoordinate)) {
@@ -38,7 +38,7 @@ public class Rook extends Piece{
                     else {
                         final Piece pieceAtDestination = board.getPiece(candidateDestinationCoordinate);
                         final Alliance pieceAtDestinationAllegiance = pieceAtDestination.getPieceAllegiance();
-                        if (this.pieceAlliance != pieceAtDestinationAllegiance) {
+                        if (this.getPieceAlliance() != pieceAtDestinationAllegiance) {
                             legalMoves.add(new Move.AttackMove(board, this, candidateDestinationCoordinate,
                                     pieceAtDestination));
                         }

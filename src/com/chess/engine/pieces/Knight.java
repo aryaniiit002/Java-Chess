@@ -24,20 +24,20 @@ public final class Knight extends Piece {
     private static final int[] CANDIDATE_MOVE_COORDINATES = { -17, -15, -10, -6, 6, 10, 15, 17 };
 
     public Knight(final Alliance pieceAlliance, final int piecePosition) {
-        super(piecePosition, pieceAlliance);
+        super(piecePosition, pieceAlliance, piecePosition1);
     }
 
     @Override
     public Collection<Move> calculateLegalMoves(final Board board) {
         final List<Move> legalMoves = new ArrayList<>();
         for(final int currentCandidateOffset : CANDIDATE_MOVE_COORDINATES) {
-            final int candidateDestinationCoordinate = this.piecePosition + currentCandidateOffset;
+            final int candidateDestinationCoordinate = this.getPiecePosition() + currentCandidateOffset;
             if(BoardUtils.isValidTileCoordinate(candidateDestinationCoordinate)) {
 
-                if(isFirstColumnExclusion(this.piecePosition, currentCandidateOffset) ||
-                    isSecondColumnExclusion(this.piecePosition, currentCandidateOffset) ||
-                    isSeventhColumnExclusion(this.piecePosition, currentCandidateOffset) ||
-                    isEighthColumnExclusion(this.piecePosition, currentCandidateOffset)) {
+                if(isFirstColumnExclusion(this.getPiecePosition(), currentCandidateOffset) ||
+                    isSecondColumnExclusion(this.getPiecePosition(), currentCandidateOffset) ||
+                    isSeventhColumnExclusion(this.getPiecePosition(), currentCandidateOffset) ||
+                    isEighthColumnExclusion(this.getPiecePosition(), currentCandidateOffset)) {
                     continue;
                 }
                 final Tile candidateDestinationTile = board.getTile(candidateDestinationCoordinate);
@@ -49,7 +49,7 @@ public final class Knight extends Piece {
                      final Alliance pieceAtDestinationAllegiance = pieceAtDestination.getPieceAllegiance();
 
                      // If this is true then we'd know that piece is enemy piece.
-                     if(this.pieceAlliance != pieceAtDestinationAllegiance) {
+                     if(this.getPieceAlliance() != pieceAtDestinationAllegiance) {
                          legalMoves.add(new Move.AttackMove(board, this, candidateDestinationCoordinate,
                              pieceAtDestination));
                      }

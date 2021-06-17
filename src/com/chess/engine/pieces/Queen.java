@@ -15,8 +15,8 @@ import com.google.common.collect.ImmutableList;
 import static com.chess.engine.board.Move.*;
 
 public class Queen extends Piece{
-    Queen(int piecePossition, Alliance pieceAlliance) {
-        super(piecePossition, pieceAlliance);
+    public Queen(final Alliance pieceAlliance, final int piecePosition) {
+        super(piecePosition, pieceAlliance, true);
     }
 
     private static final int[] CANDIDATE_MOVE_COORDINATES = { -9, -8, -7, -1, 1, 7, 8, 9 };
@@ -32,7 +32,7 @@ public class Queen extends Piece{
         final List<Move> legalMoves = new ArrayList<>();
 
         for (final int currentCandidateOffset : CANDIDATE_MOVE_COORDINATES) {
-            int candidateDestinationCoordinate = this.piecePosition;
+            int candidateDestinationCoordinate = this.getPiecePosition();
             while (BoardUtils.isValidTileCoordinate(candidateDestinationCoordinate)) {
                 if (isFirstColumnExclusion(currentCandidateOffset, candidateDestinationCoordinate) ||
                     isEighthColumnExclusion(currentCandidateOffset, candidateDestinationCoordinate)) {
@@ -47,7 +47,7 @@ public class Queen extends Piece{
                     else {
                         final Piece pieceAtDestination = board.getPiece(candidateDestinationCoordinate);
                         final Alliance pieceAtDestinationAllegiance = pieceAtDestination.getPieceAllegiance();
-                        if (this.pieceAlliance != pieceAtDestinationAllegiance) {
+                        if (this.getPieceAlliance() != pieceAtDestinationAllegiance) {
                             legalMoves.add(new AttackMove(board, this, candidateDestinationCoordinate,
                                     pieceAtDestination));
                         }
