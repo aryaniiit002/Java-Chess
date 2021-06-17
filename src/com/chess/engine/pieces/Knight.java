@@ -38,8 +38,8 @@ public final class Knight extends Piece {
                     isSecondColumnExclusion(this.piecePosition, currentCandidateOffset) ||
                     isSeventhColumnExclusion(this.piecePosition, currentCandidateOffset) ||
                     isEighthColumnExclusion(this.piecePosition, currentCandidateOffset)) {
-                continue;
-            }
+                    continue;
+                }
                 final Tile candidateDestinationTile = board.getTile(candidateDestinationCoordinate);
                  if(!candidateDestinationTile.isTileOccupied()) {
                      legalMoves.add(new Move.MajorMove(board, this, candidateDestinationCoordinate));
