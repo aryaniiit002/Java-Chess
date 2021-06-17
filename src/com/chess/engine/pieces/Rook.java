@@ -9,16 +9,14 @@ import com.chess.engine.Alliance;
 import com.chess.engine.board.Board;
 import com.chess.engine.board.BoardUtils;
 import com.chess.engine.board.Move;
-import com.chess.engine.board.Move.*;
 import com.chess.engine.board.Tile;
 
-public class Bishop extends Piece{
-
-    private static final int[] CANDIDATE_MOVE_COORDINATES = {-9, -7, 7, 9};
-
-    Bishop(int piecePossition, Alliance pieceAlliance) {
+public class Rook extends Piece{
+    Rook(int piecePossition, Alliance pieceAlliance) {
         super(piecePossition, pieceAlliance);
     }
+
+    private static final int[] CANDIDATE_MOVE_COORDINATES = { -8, -1, 1, 8 };
 
     @Override
     public Collection<Move> calculateLegalMoves(final Board board) {
@@ -35,13 +33,13 @@ public class Bishop extends Piece{
                 if (BoardUtils.isValidTileCoordinate(candidateDestinationCoordinate)) {
                     final Tile candidateDestinationTile = board.getTile(candidateDestinationCoordinate);
                     if (candidateDestinationTile.isTileOccupied()) {
-                        legalMoves.add(new MajorMove(board, this, candidateDestinationCoordinate));
+                        legalMoves.add(new Move.MajorMove(board, this, candidateDestinationCoordinate));
                     }
                     else {
                         final Piece pieceAtDestination = board.getPiece(candidateDestinationCoordinate);
                         final Alliance pieceAlliance = pieceAtDestination.getPieceAllegiance();
                         if (this.pieceAlliance != pieceAlliance) {
-                            legalMoves.add(new AttackMove(board, this, candidateDestinationCoordinate,
+                            legalMoves.add(new Move.AttackMove(board, this, candidateDestinationCoordinate,
                                     pieceAtDestination));
                         }
                         break;
@@ -54,13 +52,11 @@ public class Bishop extends Piece{
 
     private static boolean isFirstColumnExclusion(final int currentCandidate,
                                                   final int candidateDestinationCoordinate) {
-        return BoardUtils.FIRST_COLUMN[candidateDestinationCoordinate] &&
-                (currentCandidate == -9 || currentCandidate == 7);
+        return BoardUtils.FIRST_COLUMN[candidateDestinationCoordinate] && currentCandidate == -1;
     }
 
     private static boolean isEighthColumnExclusion(final int currentCandidate,
                                                    final int candidateDestinationCoordinate) {
-        return BoardUtils.EIGHT_COLUMN[candidateDestinationCoordinate] &&
-                        (currentCandidate == -7 || currentCandidate == 9);
+        return BoardUtils.EIGHT_COLUMN[candidateDestinationCoordinate] && currentCandidate == 1;
     }
 }
