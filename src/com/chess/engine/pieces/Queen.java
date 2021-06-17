@@ -12,14 +12,19 @@ import com.chess.engine.board.Move;
 import com.chess.engine.board.Move.*;
 import com.chess.engine.board.Tile;
 
-public class Bishop extends Piece{
-
-    private static final int[] CANDIDATE_MOVE_COORDINATES = {-9, -7, 7, 9};
-
-    Bishop(int piecePossition, Alliance pieceAlliance) {
+public class Queen extends Piece{
+    Queen(int piecePossition, Alliance pieceAlliance) {
         super(piecePossition, pieceAlliance);
     }
 
+    private static final int[] CANDIDATE_MOVE_COORDINATES = { -9, -8, -7, -1, 1, 7, 8, 9 };
+
+    /**
+     * Legal Move calculation engine for Queen.
+     *
+     * @param board chessBoard
+     * @return an unmodifiableList List of legal moves.
+     */
     @Override
     public Collection<Move> calculateLegalMoves(final Board board) {
         final List<Move> legalMoves = new ArrayList<>();

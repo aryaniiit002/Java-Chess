@@ -16,7 +16,7 @@ public abstract class Piece {
         this.piecePosition = piecePossition;
     }
 
-    public Alliance getPieceAlliance() {
+    public Alliance getPieceAllegiance() {
         return this.pieceAlliance;
     }
     // All of the pieces (bishop, knight, queen, pawn, etc.. ) are going to override this list and

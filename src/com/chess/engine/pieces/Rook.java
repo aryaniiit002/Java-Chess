@@ -37,8 +37,8 @@ public class Rook extends Piece{
                     }
                     else {
                         final Piece pieceAtDestination = board.getPiece(candidateDestinationCoordinate);
-                        final Alliance pieceAlliance = pieceAtDestination.getPieceAllegiance();
-                        if (this.pieceAlliance != pieceAlliance) {
+                        final Alliance pieceAtDestinationAllegiance = pieceAtDestination.getPieceAllegiance();
+                        if (this.pieceAlliance != pieceAtDestinationAllegiance) {
                             legalMoves.add(new Move.AttackMove(board, this, candidateDestinationCoordinate,
                                     pieceAtDestination));
                         }

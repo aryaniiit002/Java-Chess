@@ -46,10 +46,10 @@ public final class Knight extends Piece {
                  }
                  else {
                      final Piece pieceAtDestination = candidateDestinationTile.getPiece();
-                     final Alliance pieceAlliance = pieceAtDestination.getPieceAlliance();
+                     final Alliance pieceAtDestinationAllegiance = pieceAtDestination.getPieceAllegiance();
 
                      // If this is true then we'd know that piece is enemy piece.
-                     if(this.pieceAlliance != pieceAlliance) {
+                     if(this.pieceAlliance != pieceAtDestinationAllegiance) {
                          legalMoves.add(new Move.AttackMove(board, this, candidateDestinationCoordinate,
                              pieceAtDestination));
                      }
@@ -68,12 +68,12 @@ public final class Knight extends Piece {
     private static boolean isSecondColumnExclusion(final int currentPosition,
                                                   final int candidateOffset) {
         return BoardUtils.SECOND_COLUMN[currentPosition] && (candidateOffset == 6 ||
-            candidateOffset == -10;
+            candidateOffset == -10);
     }
     private static boolean isSeventhColumnExclusion(final int currentPosition,
                                                   final int candidateOffset) {
         return BoardUtils.SEVENTH_COLUMN[currentPosition] && (candidateOffset == 6 ||
-            candidateOffset == -10;;
+            candidateOffset == -10);
     }
     private static boolean isEighthColumnExclusion(final int currentPosition,
                                                   final int candidateOffset) {
