@@ -41,7 +41,7 @@ public class King extends Piece{
                  }
                  else {
                      final Piece pieceAtDestination = candidateDestinationTile.getPiece();
-                     final Alliance pieceAtDestinationAllegiance = pieceAtDestination.getPieceAllegiance();
+                     final Alliance pieceAtDestinationAllegiance = pieceAtDestination.getPieceAlliance();
 
                      // If this is true then we'd know that piece is enemy piece.
                      if(this.getPieceAlliance() != pieceAtDestinationAllegiance) {
@@ -52,6 +52,11 @@ public class King extends Piece{
             }
         }
         return ImmutableList.copyOf(legalMoves);
+    }
+
+    @Override
+    public String toString() {
+        return PieceType.KING.toString();
     }
 
     // This exclision will be when king is on the 1st column and CANDIDATE_MOVE_COORDINATES is either

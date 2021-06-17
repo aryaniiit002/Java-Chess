@@ -24,7 +24,7 @@ public final class Knight extends Piece {
     private static final int[] CANDIDATE_MOVE_COORDINATES = { -17, -15, -10, -6, 6, 10, 15, 17 };
 
     public Knight(final Alliance pieceAlliance, final int piecePosition) {
-        super(piecePosition, pieceAlliance, piecePosition1);
+        super(piecePosition, pieceAlliance, true);
     }
 
     @Override
@@ -46,7 +46,7 @@ public final class Knight extends Piece {
                  }
                  else {
                      final Piece pieceAtDestination = candidateDestinationTile.getPiece();
-                     final Alliance pieceAtDestinationAllegiance = pieceAtDestination.getPieceAllegiance();
+                     final Alliance pieceAtDestinationAllegiance = pieceAtDestination.getPieceAlliance();
 
                      // If this is true then we'd know that piece is enemy piece.
                      if(this.getPieceAlliance() != pieceAtDestinationAllegiance) {
@@ -57,6 +57,11 @@ public final class Knight extends Piece {
             }
         }
         return ImmutableList.copyOf(legalMoves);
+    }
+
+    @Override
+    public String toString() {
+        return PieceType.KNIGHT.toString();
     }
 
     // Here all the offSets written are for when our rule breaks down if current possition is in 1st column.

@@ -40,14 +40,14 @@ public class Pawn extends Piece{
             }
             // This if handles the non-attacking pawn moves
             if (currentCandidateOffset == 8 && !board.getTile(candidateDestinationCoordinate).isTileOccupied()) {
-                legalMoves.add(new Move.MajorMove(board, this, candidateDestinationCoordinate);
+                legalMoves.add(new Move.MajorMove(board, this, candidateDestinationCoordinate));
             }
             // This if handles the pawn jump
             else if (currentCandidateOffset == 16 && this.isFirstMove() &&
                     (BoardUtils.SECOND_ROW[this.getPiecePosition()] && this.getPieceAlliance().isBlack() ||
                         BoardUtils.SEVENTH_ROW[this.getPiecePosition()] && this.getPieceAlliance().isWhite())) {
                 final int behindCandidateDestinationCoordinate =
-                        this.getPiecePosition() + this.getPieceAlliance().getDirection() * 8;
+                        this.getPiecePosition() + (this.getPieceAlliance().getDirection() << 3);
                 if(!board.getTile(candidateDestinationCoordinate).isTileOccupied()
                     && !board.getTile(behindCandidateDestinationCoordinate).isTileOccupied()) {
                     legalMoves.add(new Move.MajorMove(board, this, candidateDestinationCoordinate));
@@ -59,7 +59,7 @@ public class Pawn extends Piece{
                 BoardUtils.FIRST_COLUMN[this.getPiecePosition()] && this.getPieceAlliance().isBlack())) {
                 if(board.getTile(candidateDestinationCoordinate).isTileOccupied()) {
                     final Piece pieceOnCandidate = board.getTile(candidateDestinationCoordinate).getPiece();
-                    if (this.getPieceAlliance() != pieceOnCandidate.getPieceAllegiance()) {
+                    if (this.getPieceAlliance() != pieceOnCandidate.getPieceAlliance()) {
                         legalMoves.add(new Move.MajorMove(board, this, candidateDestinationCoordinate));
                     }
                 }
@@ -69,12 +69,17 @@ public class Pawn extends Piece{
                 BoardUtils.FIRST_COLUMN[this.getPiecePosition()] && this.getPieceAlliance().isWhite())) {
                 if(board.getTile(candidateDestinationCoordinate).isTileOccupied()) {
                     final Piece pieceOnCandidate = board.getTile(candidateDestinationCoordinate).getPiece();
-                    if (this.getPieceAlliance() != pieceOnCandidate.getPieceAllegiance()) {
+                    if (this.getPieceAlliance() != pieceOnCandidate.getPieceAlliance()) {
                         legalMoves.add(new Move.MajorMove(board, this, candidateDestinationCoordinate));
                     }
                 }
             }
         }
         return ImmutableList.copyOf(legalMoves);
+    }
+
+    @Override
+    public String toString() {
+        return PieceType.PAWN.toString();
     }
 }

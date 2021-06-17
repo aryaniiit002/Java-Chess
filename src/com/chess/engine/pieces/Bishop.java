@@ -39,8 +39,8 @@ public class Bishop extends Piece{
                         legalMoves.add(new MajorMove(board, this, candidateDestinationCoordinate));
                     }
                     else {
-                        final Piece pieceAtDestination = board.getPiece(candidateDestinationCoordinate);
-                        final Alliance pieceAtDestinationAllegiance = pieceAtDestination.getPieceAllegiance();
+                        final Piece pieceAtDestination = candidateDestinationTile.getPiece();
+                        final Alliance pieceAtDestinationAllegiance = pieceAtDestination.getPieceAlliance();
                         if (this.getPieceAlliance() != pieceAtDestinationAllegiance) {
                             legalMoves.add(new AttackMove(board, this, candidateDestinationCoordinate,
                                     pieceAtDestination));
@@ -51,6 +51,11 @@ public class Bishop extends Piece{
             }
         }
         return ImmutableList.copyOf(legalMoves);
+    }
+
+    @Override
+    public String toString() {
+        return PieceType.BISHOP.toString();
     }
 
     private static boolean isFirstColumnExclusion(final int currentPosition,

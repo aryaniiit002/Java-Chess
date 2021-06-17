@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import com.chess.engine.Alliance;
 import com.chess.engine.pieces.Bishop;
@@ -23,10 +24,33 @@ public final class Board {
     private final Collection<Piece> whitePieces;
     private final Collection<Piece> blackPieces;
 
-    private Board(final Builder builder, Collection<Piece> whitePieces, Collection<Piece> blackPieces) {
+    private Board(final Builder builder) {
         this.gameBoard = createGameBoard(builder);
         this.whitePieces = calculateActivePieces(this.gameBoard, Alliance.WHITE);
         this.blackPieces = calculateActivePieces(this.gameBoard, Alliance.BLACK);
+        final Collection<Move> whiteStandardMoves = calculateLegalMoves(this.whitePieces);
+        final Collection<Move> blackStandardMoves = calculateLegalMoves(this.blackPieces);
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < BoardUtils.NUM_TILES; i++) {
+            final String tileText = this.gameBoard.get(i).toString();
+            builder.append(String.format("%3s", tileText));
+            if ((i + 1) % 8 == 0) {
+                builder.append("\n");
+            }
+        }
+        return builder.toString();
+    }
+
+    private Collection<Move> calculateLegalMoves(final Collection<Piece> pieces) {
+        final List<Move> legalMoves = new ArrayList<>();
+        for(final Piece piece: pieces) {
+            legalMoves.addAll(piece.calculateLegalMoves(this));
+        }
+        return ImmutableList.copyOf(legalMoves);
     }
 /*
     private static Collection<Piece> calculateActivePieces(final Builder builder,
@@ -70,12 +94,7 @@ public final class Board {
         return this.boardConfig.get(coordinate);;
     }*/
 
-    // create the initial standard position of chessBoard.
-    public static Board createStandardBoard() {
-        return STANDARD_BOARD;
-    }
-
-    private static Board createStandardBoardImpl() {
+    public static Board createStandardBoardImpl() {
         final Builder builder = new Builder();
         // Black Layout
         builder.setPiece(new Rook(Alliance.BLACK, 0));
@@ -119,7 +138,7 @@ public final class Board {
 
     public static class Builder {
 
-        private Map<Integer, Piece> boardConfig;
+        private final Map<Integer, Piece> boardConfig;
         private Alliance nextMoveMaker; // To keep track of person to move (person whose turn it is to move on chessBoard)
 
         public Builder() {
@@ -136,15 +155,15 @@ public final class Board {
             return this;
         }
 
-        public Board build() {
-            return new Board(this);
-        }
-
         /**
          * We make the tile id {Integer} of a chessBoard to a given piece {Piece} on that tile id.
          */
         public Map<Integer, Piece> getBoardConfig() {
             return Collections.unmodifiableMap(boardConfig);
+        }
+
+        public Board build() {
+            return new Board(this);
         }
     }
 }
