@@ -2,7 +2,6 @@ package com.chess.engine.pieces;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 import com.chess.engine.Alliance;
@@ -11,6 +10,7 @@ import com.chess.engine.board.BoardUtils;
 import com.chess.engine.board.Move;
 import com.chess.engine.board.Move.*;
 import com.chess.engine.board.Tile;
+import com.google.common.collect.ImmutableList;
 
 public class Bishop extends Piece{
 
@@ -49,7 +49,7 @@ public class Bishop extends Piece{
                 }
             }
         }
-        return Collections.unmodifiableList(legalMoves);
+        return ImmutableList.copyOf(legalMoves);
     }
 
     private static boolean isFirstColumnExclusion(final int currentPosition,
@@ -60,7 +60,7 @@ public class Bishop extends Piece{
 
     private static boolean isEighthColumnExclusion(final int currentPosition,
                                                   final int candidatePosition) {
-        return BoardUtils.EIGHT_COLUMN[candidatePosition] && (currentPosition == -7
+        return BoardUtils.EIGHTH_COLUMN[candidatePosition] && (currentPosition == -7
                 || currentPosition == 1 || currentPosition == 9);
     }
 }

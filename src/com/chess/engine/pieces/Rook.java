@@ -2,7 +2,6 @@ package com.chess.engine.pieces;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 import com.chess.engine.Alliance;
@@ -10,6 +9,7 @@ import com.chess.engine.board.Board;
 import com.chess.engine.board.BoardUtils;
 import com.chess.engine.board.Move;
 import com.chess.engine.board.Tile;
+import com.google.common.collect.ImmutableList;
 
 public class Rook extends Piece{
     Rook(int piecePossition, Alliance pieceAlliance) {
@@ -47,7 +47,7 @@ public class Rook extends Piece{
                 }
             }
         }
-        return Collections.unmodifiableList(legalMoves);
+        return ImmutableList.copyOf(legalMoves);
     }
 
     private static boolean isFirstColumnExclusion(final int currentCandidate,
@@ -57,6 +57,6 @@ public class Rook extends Piece{
 
     private static boolean isEighthColumnExclusion(final int currentCandidate,
                                                    final int candidateDestinationCoordinate) {
-        return BoardUtils.EIGHT_COLUMN[candidateDestinationCoordinate] && currentCandidate == 1;
+        return BoardUtils.EIGHTH_COLUMN[candidateDestinationCoordinate] && currentCandidate == 1;
     }
 }

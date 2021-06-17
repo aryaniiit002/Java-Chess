@@ -13,7 +13,7 @@ public final class BoardUtils {
     public static final boolean[] FIRST_COLUMN = initColumn(0);
     public static final boolean[] SECOND_COLUMN = initColumn(1);
     public static final boolean[] SEVENTH_COLUMN = initColumn(6);
-    public static final boolean[] EIGHT_COLUMN = initColumn(7);
+    public static final boolean[] EIGHTH_COLUMN = initColumn(7);
     public static final boolean[] SECOND_ROW = initRow(8);
     public static final boolean[] SEVENTH_ROW = initRow(48);
 
