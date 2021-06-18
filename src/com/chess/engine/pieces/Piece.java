@@ -40,6 +40,8 @@ public abstract class Piece {
     // have their own behavior defined.
     public abstract Collection<Move> calculateLegalMoves(final Board board);
 
+    public abstract Piece movePiece(Move move);
+
     //protected abstract boolean isFirstMove();
 
     public enum PieceType {

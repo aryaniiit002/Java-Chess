@@ -25,6 +25,10 @@ public class King extends Piece{
 
     private static final int[] CANDIDATE_MOVE_COORDINATES = { -9, -8, -7, -1, 1, 7, 8, 9 };
 
+    public King(Alliance pieceAlliance, int destinationCoordinate) {
+        super(PieceType.KING, destinationCoordinate, pieceAlliance, true);
+    }
+
     @Override
     public Collection<Move> calculateLegalMoves(final Board board) {
         final List<Move> legalMoves = new ArrayList<>();
@@ -52,6 +56,12 @@ public class King extends Piece{
             }
         }
         return ImmutableList.copyOf(legalMoves);
+    }
+
+    @Override
+    public King movePiece(Move move) {
+        // this will create a new King in the new location.
+        return new King(move.getMovedPiece().getPieceAlliance(), move.getDestinationCoordinate());
     }
 
     @Override

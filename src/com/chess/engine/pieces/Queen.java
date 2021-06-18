@@ -60,6 +60,12 @@ public class Queen extends Piece{
     }
 
     @Override
+    public Queen movePiece(Move move) {
+        // this will create a new Queen in the new location.
+        return new Queen(move.getMovedPiece().getPieceAlliance(), move.getDestinationCoordinate());
+    }
+
+    @Override
     public String toString() {
         return PieceType.QUEEN.toString();
     }
