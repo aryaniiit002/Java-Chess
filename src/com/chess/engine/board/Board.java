@@ -16,6 +16,7 @@ import com.chess.engine.pieces.Piece;
 import com.chess.engine.pieces.Queen;
 import com.chess.engine.pieces.Rook;
 import com.chess.engine.player.BlackPlayer;
+import com.chess.engine.player.Player;
 import com.chess.engine.player.WhitePlayer;
 import com.google.common.collect.ImmutableList;
 
@@ -147,6 +148,14 @@ public final class Board {
         builder.setMoveMaker(Alliance.WHITE);
         //build the board
         return builder.build();
+    }
+
+    public WhitePlayer whitePlayer() {
+        return this.whitePlayer;
+    }
+
+    public BlackPlayer blackPlayer() {
+        return this.blackPlayer;
     }
 
     public static class Builder {
