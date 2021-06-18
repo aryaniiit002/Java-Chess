@@ -14,7 +14,7 @@ public abstract class Piece {
     private final int cachedHashCode;
 
     protected Piece(final PieceType type, final int piecePosition,
-                    final Alliance pieceAlliance, final boolean isFirstMove, int cachedHashCode) {
+                    final Alliance pieceAlliance, final boolean isFirstMove) {
         this.pieceType = type;
         this.pieceAlliance = pieceAlliance;
         this.piecePosition = piecePosition;

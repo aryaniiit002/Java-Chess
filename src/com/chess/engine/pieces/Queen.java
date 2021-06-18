@@ -16,7 +16,7 @@ import static com.chess.engine.board.Move.*;
 
 public class Queen extends Piece{
     public Queen(final Alliance pieceAlliance, final int piecePosition) {
-        super(PieceType.QUEEN, piecePosition, pieceAlliance, true, cachedHashCode);
+        super(PieceType.QUEEN, piecePosition, pieceAlliance, true);
     }
 
     private static final int[] CANDIDATE_MOVE_COORDINATES = { -9, -8, -7, -1, 1, 7, 8, 9 };
