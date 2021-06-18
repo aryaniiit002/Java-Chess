@@ -13,7 +13,7 @@ import com.google.common.collect.ImmutableList;
 
 public class Rook extends Piece{
     public Rook(final Alliance pieceAlliance, final int piecePossition) {
-        super(piecePossition, pieceAlliance, true);
+        super(PieceType.ROOK, piecePossition, pieceAlliance, true);
     }
 
     private static final int[] CANDIDATE_MOVE_COORDINATES = { -8, -1, 1, 8 };

@@ -7,14 +7,21 @@ import com.chess.engine.board.Board;
 import com.chess.engine.board.Move;
 
 public abstract class Piece {
+    private final PieceType pieceType;
     private final int piecePosition;
     private final Alliance pieceAlliance; // Alliance is an Enum.
     private final boolean isFirstMove;
 
-    protected Piece(final int piecePosition,  final Alliance pieceAlliance, final boolean isFirstMove) {
+    protected Piece(final PieceType type, final int piecePosition,
+                    final Alliance pieceAlliance, final boolean isFirstMove) {
+        this.pieceType = type;
         this.pieceAlliance = pieceAlliance;
         this.piecePosition = piecePosition;
         this.isFirstMove = isFirstMove;
+    }
+
+    public PieceType getPieceType() {
+        return this.pieceType;
     }
 
     public int getPiecePosition() {
@@ -37,12 +44,42 @@ public abstract class Piece {
 
     public enum PieceType {
 
-        PAWN(100, "P"),
-        KNIGHT(300, "N"),
-        BISHOP(330, "B"),
-        ROOK(500, "R"),
-        QUEEN(900, "Q"),
-        KING(10000, "K");
+        PAWN(100, "P") {
+            @Override
+            public boolean isKing() {
+                return false;
+            }
+        },
+        KNIGHT(300, "N") {
+            @Override
+            public boolean isKing() {
+                return false;
+            }
+        },
+        BISHOP(330, "B") {
+            @Override
+            public boolean isKing() {
+                return false;
+            }
+        },
+        ROOK(500, "R") {
+            @Override
+            public boolean isKing() {
+                return false;
+            }
+        },
+        QUEEN(900, "Q") {
+            @Override
+            public boolean isKing() {
+                return false;
+            }
+        },
+        KING(10000, "K") {
+            @Override
+            public boolean isKing() {
+                return true;
+            }
+        };
 
         private final int value;
         private final String pieceName;
@@ -61,5 +98,7 @@ public abstract class Piece {
             this.value = val;
             this.pieceName = pieceName;
         }
+
+        public abstract boolean isKing();
     }
 }

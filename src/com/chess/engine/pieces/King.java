@@ -20,7 +20,7 @@ public class King extends Piece{
      * The king can make a special move "Castling".
      */
     public King(final Alliance pieceAlliance, final int piecePosition, final boolean isFirstMove) {
-        super(piecePosition, pieceAlliance, isFirstMove);
+        super(PieceType.KING, piecePosition, pieceAlliance, isFirstMove);
     }
 
     private static final int[] CANDIDATE_MOVE_COORDINATES = { -9, -8, -7, -1, 1, 7, 8, 9 };
