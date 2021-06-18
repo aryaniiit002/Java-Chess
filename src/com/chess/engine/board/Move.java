@@ -3,9 +3,9 @@ package com.chess.engine.board;
 import com.chess.engine.pieces.Piece;
 
 public abstract class Move {
-    private final Board board;
+    protected final Board board;
     private final int destinationCoordinate;
-    private final Piece movedPiece;
+    protected final Piece movedPiece;
 
     private Move(final Board board,
                  final Piece pieceMoved,
@@ -24,6 +24,10 @@ public abstract class Move {
 
     public int getDestinationCoordinate() {
         return this.destinationCoordinate;
+    }
+
+    public Piece getMovedPiece() {
+        return this.movedPiece;
     }
 
     public abstract Board execute();
@@ -60,8 +64,7 @@ public abstract class Move {
                 builder.setPiece(piece);
             }
             // Move the moved piece
-            // TODO
-            builder.setPiece(null);
+            builder.setPiece(this.movedPiece.movePiece(this));
             // then we set the moveMaker to the opponent.
             builder.setMoveMaker(this.board.currentPlayer().getOpponent().getAlliance());
 

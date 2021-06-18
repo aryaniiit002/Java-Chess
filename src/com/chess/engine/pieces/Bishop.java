@@ -18,7 +18,7 @@ public class Bishop extends Piece{
     private static final int[] CANDIDATE_MOVE_COORDINATES = {-9, -7, 7, 9};
 
     public Bishop(final Alliance pieceAlliance, final int piecePossition) {
-        super(PieceType.BISHOP, piecePossition, pieceAlliance, true);
+        super(PieceType.BISHOP, piecePossition, pieceAlliance, true, cachedHashCode);
     }
 
     @Override
@@ -51,6 +51,12 @@ public class Bishop extends Piece{
             }
         }
         return ImmutableList.copyOf(legalMoves);
+    }
+
+    @Override
+    public Bishop movePiece(final Move move) {
+        // this will create a new bishop in the new location.
+        return new Bishop(move.getMovedPiece().getPieceAlliance(), move.getDestinationCoordinate());
     }
 
     @Override

@@ -16,7 +16,7 @@ import static com.chess.engine.board.Move.*;
 
 public class Queen extends Piece{
     public Queen(final Alliance pieceAlliance, final int piecePosition) {
-        super(PieceType.QUEEN, piecePosition, pieceAlliance, true);
+        super(PieceType.QUEEN, piecePosition, pieceAlliance, true, cachedHashCode);
     }
 
     private static final int[] CANDIDATE_MOVE_COORDINATES = { -9, -8, -7, -1, 1, 7, 8, 9 };
@@ -57,6 +57,12 @@ public class Queen extends Piece{
             }
         }
         return ImmutableList.copyOf(legalMoves);
+    }
+
+    @Override
+    public Queen movePiece(Move move) {
+        // this will create a new Queen in the new location.
+        return new Queen(move.getMovedPiece().getPieceAlliance(), move.getDestinationCoordinate());
     }
 
     @Override

@@ -24,7 +24,7 @@ public final class Knight extends Piece {
     private static final int[] CANDIDATE_MOVE_COORDINATES = { -17, -15, -10, -6, 6, 10, 15, 17 };
 
     public Knight(final Alliance pieceAlliance, final int piecePosition) {
-        super(PieceType.KNIGHT, piecePosition, pieceAlliance, true);
+        super(PieceType.KNIGHT, piecePosition, pieceAlliance, true, cachedHashCode);
     }
 
     @Override
@@ -57,6 +57,12 @@ public final class Knight extends Piece {
             }
         }
         return ImmutableList.copyOf(legalMoves);
+    }
+
+    @Override
+    public Knight movePiece(Move move) {
+        // this will create a new Knight in the new location.
+        return new Knight(move.getMovedPiece().getPieceAlliance(), move.getDestinationCoordinate());
     }
 
     @Override

@@ -13,7 +13,7 @@ import com.google.common.collect.ImmutableList;
 
 public class Rook extends Piece{
     public Rook(final Alliance pieceAlliance, final int piecePossition) {
-        super(PieceType.ROOK, piecePossition, pieceAlliance, true);
+        super(PieceType.ROOK, piecePossition, pieceAlliance, true, cachedHashCode);
     }
 
     private static final int[] CANDIDATE_MOVE_COORDINATES = { -8, -1, 1, 8 };
@@ -48,6 +48,12 @@ public class Rook extends Piece{
             }
         }
         return ImmutableList.copyOf(legalMoves);
+    }
+
+    @Override
+    public Rook movePiece(Move move) {
+        // this will create a new Rook in the new location.
+        return new Rook(move.getMovedPiece().getPieceAlliance(), move.getDestinationCoordinate());
     }
 
     @Override
