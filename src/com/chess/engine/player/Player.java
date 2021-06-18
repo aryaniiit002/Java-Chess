@@ -1,6 +1,8 @@
 package com.chess.engine.player;
 
 import java.util.Collection;
+import java.util.Collections;
+import java.util.stream.Collectors;
 
 import com.chess.engine.Alliance;
 import com.chess.engine.board.Board;
@@ -12,6 +14,7 @@ public abstract class Player {
     protected final Board board;
     protected final King playerKing;
     protected final Collection<Move> legalMoves;
+    protected final boolean isInCheck;
 
     Player(final Board board,
            final Collection<Move> legalMoves,
@@ -19,6 +22,17 @@ public abstract class Player {
         this.board = board;
         this.playerKing = establishKing();
         this.legalMoves = legalMoves;
+        this.isInCheck = !Player.calculateAttacksOnTile(this.PlayerKing().getPiecePosition(), opponentMoves).isEmpty();
+    }
+/* We are not defining the isInCheck in constructor bcoz we further need to investigate all other player moves
+ for which we use "hasEscapeMoves()" method.
+*/
+
+    private static Collection<Move> calculateAttacksOnTile(final int piecePosition,
+                                                   final Collection<Move> moves) {
+        return moves.stream()
+                    .filter(move -> move.getDestinationCoordinate() == piecePosition)
+                    .collect(Collectors.collectingAndThen(Collectors.toList(), Collections::unmodifiableList));
     }
 
     /**
@@ -38,7 +52,28 @@ public abstract class Player {
     }
 
     public boolean isInCheck() {
-        return false;
+        return this.isInCheck && !hasEscapeMoves();
+    }
+
+    /**
+     * Player is not in check currently and doesn't have any escape moves
+     * (means any move we make may lead to checking position).
+     */
+    public boolean isInStaleMate() {
+        return !isInCheck && !hasEscapeMoves();
+    }
+
+    /**
+     * In order to calculate whether king can escape, we will go through each of the player legal moves
+     * and we are going to make those moves on imaginary board, then we look at the board and
+     * if we can make the move we return true otherwise (if it's a illegal move) we return false.
+     *
+     * @return whether king can escape or not.
+     */
+    private boolean hasEscapeMoves() {
+        return this.legalMoves.stream()
+                              .anyMatch(move -> makeMove(move)
+                              .getMoveStatus().isDone());
     }
 
     public boolean isInCheckMate() {
@@ -51,10 +86,6 @@ public abstract class Player {
 
     public MoveTransition makeMove(final Move move) {
         return null;
-    }
-
-    public boolean isInStaleMate() {
-        return false;
     }
 
     public abstract Collection<Piece> getActivePieces();
