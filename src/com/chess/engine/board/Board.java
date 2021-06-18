@@ -29,15 +29,17 @@ public final class Board {
     private final BlackPlayer blackPlayer;
     private final Player currentPlayer;
 
-    private Board(final Builder builder, Player currentPlayer) {
+    private static final Board STANDARD_BOARD = createStandardBoardImpl();
+
+    private Board(final Builder builder) {
         this.gameBoard = createGameBoard(builder);
-        this.currentPlayer = null;
         this.whitePieces = calculateActivePieces(this.gameBoard, Alliance.WHITE);
         this.blackPieces = calculateActivePieces(this.gameBoard, Alliance.BLACK);
         final Collection<Move> whiteStandardMoves = calculateLegalMoves(this.whitePieces);
         final Collection<Move> blackStandardMoves = calculateLegalMoves(this.blackPieces);
         this.whitePlayer = new WhitePlayer(this, whiteStandardMoves, blackStandardMoves);
         this.blackPlayer = new BlackPlayer(this, whiteStandardMoves, blackStandardMoves);
+        this.currentPlayer = builder.nextMoveMaker.choosePlayerByAlliance(this.whitePlayer, this.blackPlayer);
     }
 
     @Override
@@ -114,6 +116,10 @@ public final class Board {
     /*public Piece getPiece(int candidateDestinationCoordinate) {
         return this.boardConfig.get(coordinate);;
     }*/
+
+    public static Board createStandardBoard() {
+        return STANDARD_BOARD;
+    }
 
     public static Board createStandardBoardImpl() {
         final Builder builder = new Builder();
@@ -192,7 +198,7 @@ public final class Board {
         }
 
         public Board build() {
-            return new Board(this, currentPlayer);
+            return new Board(this);
         }
     }
 }

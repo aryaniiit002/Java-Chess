@@ -36,9 +36,36 @@ public abstract class Move {
             super(board, pieceMoved, destinationCoordinate);
         }
 
+        /**
+         * We use the board builder it's gonna help us materialize a new board to return from
+         * execute. we will traverse through all of the current player, through all the pieces and
+         * for all the pieces that aren't the moved piece.
+         * We want to place them on the new board without any change.
+         *
+         * @return new board
+         */
         @Override
         public Board execute() {
-            return null;
+            final Board.Builder builder = new Board.Builder();
+
+            for(final Piece piece : this.board.currentPlayer().getActivePieces()) {
+                // TODO hashcode and equals for pieces
+                if(!this.movedPiece.equals(piece)) {
+                    builder.setPiece(piece);
+                }
+            }
+
+            // For enemy pieces
+            for(final Piece piece : this.board.currentPlayer().getOpponent().getActivePieces()) {
+                builder.setPiece(piece);
+            }
+            // Move the moved piece
+            // TODO
+            builder.setPiece(null);
+            // then we set the moveMaker to the opponent.
+            builder.setMoveMaker(this.board.currentPlayer().getOpponent().getAlliance());
+
+            return builder.build();
         }
     }
 
