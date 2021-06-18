@@ -27,9 +27,11 @@ public final class Board {
     private final Collection<Piece> blackPieces;
     private final WhitePlayer whitePlayer;
     private final BlackPlayer blackPlayer;
+    private final Player currentPlayer;
 
-    private Board(final Builder builder) {
+    private Board(final Builder builder, Player currentPlayer) {
         this.gameBoard = createGameBoard(builder);
+        this.currentPlayer = null;
         this.whitePieces = calculateActivePieces(this.gameBoard, Alliance.WHITE);
         this.blackPieces = calculateActivePieces(this.gameBoard, Alliance.BLACK);
         final Collection<Move> whiteStandardMoves = calculateLegalMoves(this.whitePieces);
@@ -51,6 +53,10 @@ public final class Board {
         return builder.toString();
     }
 
+    public Player currentPlayer() {
+        return this.currentPlayer;
+    }
+
     public Collection<Piece> getBlackPieces() {
         return this.blackPieces;
     }
@@ -66,6 +72,7 @@ public final class Board {
         }
         return ImmutableList.copyOf(legalMoves);
     }
+
 /*
     private static Collection<Piece> calculateActivePieces(final Builder builder,
                                                            final Alliance alliance) {
@@ -185,7 +192,7 @@ public final class Board {
         }
 
         public Board build() {
-            return new Board(this);
+            return new Board(this, currentPlayer);
         }
     }
 }
