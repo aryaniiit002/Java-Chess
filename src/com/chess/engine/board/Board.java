@@ -30,6 +30,7 @@ public final class Board {
     private final WhitePlayer whitePlayer;
     private final BlackPlayer blackPlayer;
     private final Player currentPlayer;
+    private final Pawn enPassantPawn;
 
     private static final Board STANDARD_BOARD = createStandardBoardImpl();
 
@@ -37,6 +38,7 @@ public final class Board {
         this.gameBoard = createGameBoard(builder);
         this.whitePieces = calculateActivePieces(this.gameBoard, Alliance.WHITE);
         this.blackPieces = calculateActivePieces(this.gameBoard, Alliance.BLACK);
+        this.enPassantPawn = builder.enPassantPawn;
         final Collection<Move> whiteStandardMoves = calculateLegalMoves(this.whitePieces);
         final Collection<Move> blackStandardMoves = calculateLegalMoves(this.blackPieces);
         this.whitePlayer = new WhitePlayer(this, whiteStandardMoves, blackStandardMoves);
@@ -67,6 +69,10 @@ public final class Board {
 
     public Collection<Piece> getWhitePieces() {
         return this.whitePieces;
+    }
+
+    public Pawn getEnPassantPawn() {
+        return this.enPassantPawn;
     }
 
     private Collection<Move> calculateLegalMoves(final Collection<Piece> pieces) {
@@ -182,6 +188,7 @@ public final class Board {
 
         private final Map<Integer, Piece> boardConfig;
         private Alliance nextMoveMaker; // To keep track of person to move (person whose turn it is to move on chessBoard)
+        Pawn enPassantPawn;
 
         public Builder() {
             this.boardConfig = new HashMap<>(32, 1.0f);
@@ -197,6 +204,10 @@ public final class Board {
             return this;
         }
 
+        public Void setEnPassantPawn(final Pawn enPassantPawn) {
+            this.enPassantPawn = enPassantPawn;
+        }
+
         /**
          * We make the tile id {Integer} of a chessBoard to a given piece {Piece} on that tile id.
          */
@@ -206,6 +217,9 @@ public final class Board {
 
         public Board build() {
             return new Board(this);
+        }
+
+        public void setEnPassantPawn(Pawn movedPawn) {
         }
     }
 }

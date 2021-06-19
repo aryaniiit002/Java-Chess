@@ -1,5 +1,6 @@
 package com.chess.engine.board;
 
+import com.chess.engine.board.Board.Builder;
 import com.chess.engine.pieces.Pawn;
 import com.chess.engine.pieces.Piece;
 import com.chess.engine.pieces.Rook;
@@ -8,6 +9,7 @@ public abstract class Move {
     protected final Board board;
     private final int destinationCoordinate;
     protected final Piece movedPiece;
+    protected final boolean isFirstMove;
 
     private static final Move NULL_MOVE = new NullMove();
 
@@ -17,6 +19,7 @@ public abstract class Move {
         this.board = board;
         this.destinationCoordinate = destinationCoordinate;
         this.movedPiece = pieceMoved;
+        this.isFirstMove = pieceMoved.isFirstMove();
     }
 
     private Move(final Board board,
@@ -24,6 +27,30 @@ public abstract class Move {
         this.board = board;
         this.destinationCoordinate = destinationCoordinate;
         this.movedPiece = null;
+        this.isFirstMove = false;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = 1;
+        result = 31 * result + this.destinationCoordinate;
+        result = 31 * result + this.movedPiece.hashCode();
+        result = 31 * result + this.movedPiece.getPiecePosition();
+        result += isFirstMove ? 1 : 0;
+        return result;
+    }
+
+    @Override
+    public boolean equals(final Object other) {
+        if (this == other) {
+            return true;
+        }
+        if (!(other instanceof Move)) {
+            return false;
+        }
+        final Move otherMove = (Move) other;
+        return getDestinationCoordinate() == otherMove.getDestinationCoordinate() &&
+               getMovedPiece().equals(otherMove.getMovedPiece());
     }
 
     public int getCurrentCoordinate() {
@@ -73,7 +100,7 @@ public abstract class Move {
         public MajorMove(final Board board,
                                final Piece pieceMoved,
                                final int destinationCoordinate) {
-            super(board, pieceMoved, destinationCoordinate);
+            super(board, pieceMoved, destinationCoordinate, isFirstMove);
         }
 
     }
@@ -85,12 +112,37 @@ public abstract class Move {
                                final Piece pieceMoved,
                                final int destinationCoordinate,
                           final Piece attackedPiece) {
-            super(board, pieceMoved, destinationCoordinate);
+            super(board, pieceMoved, destinationCoordinate, isFirstMove);
             this.attackedPiece = attackedPiece;
         }
 
+        @Override
+        public int hashCode() {
+            return this.attackedPiece.hashCode() + super.hashCode();
+        }
+
+        @Override
+        public boolean equals(final Object other) {
+            if (this == other) {
+                return true;
+            }
+            if (!(other instanceof AttackMove)) {
+                return false;
+            }
+            final AttackMove otherAttackMove = (AttackMove) other;
+            return super.equals(otherAttackMove) && getAttackedPiece().equals(otherAttackMove.getAttackedPiece());
+        }
+
         public Piece getAttackedPiece() {
-            return attackedPiece;
+            return this.attackedPiece;
+        }
+
+        public boolean isAttack() {
+            return false;
+        }
+
+        public boolean isCastlingMove() {
+            return false;
         }
 
         @Override
@@ -104,7 +156,7 @@ public abstract class Move {
         public PawnMove(final Board board,
                         final Piece pieceMoved,
                         final int destinationCoordinate) {
-            super(board, pieceMoved, destinationCoordinate);
+            super(board, pieceMoved, destinationCoordinate, isFirstMove);
         }
 /*
         @Override
@@ -183,7 +235,7 @@ public abstract class Move {
                         final int destinationCoordinate) {
             super(board, pieceMoved, destinationCoordinate);
         }
-/*
+
         @Override
         public boolean equals(final Object other) {
             return this == other || other instanceof PawnJump && super.equals(other);
@@ -206,8 +258,7 @@ public abstract class Move {
         public String toString() {
             return BoardUtils.INSTANCE.getPositionAtCoordinate(this.destinationCoordinate);
         }
-        */
- */
+
     }
 
     abstract static class CastleMove extends Move {
@@ -222,7 +273,7 @@ public abstract class Move {
                    final Rook castleRook,
                    final int castleRookStart,
                    final int castleRookDestination) {
-            super(board, pieceMoved, destinationCoordinate);
+            super(board, pieceMoved, destinationCoordinate, isFirstMove);
             this.castleRook = castleRook;
             this.castleRookStart = castleRookStart;
             this.castleRookDestination = castleRookDestination;
