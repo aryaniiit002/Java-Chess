@@ -79,7 +79,8 @@ public class King extends Piece{
     @Override
     public King movePiece(final Move move) {
         // this will create a new King in the new location.
-        return new King(this.pieceAlliance, move.getDestinationCoordinate(), false, move.isCastlingMove(), false, false);
+        return new King(this.pieceAlliance, move.getDestinationCoordinate(), false,
+            move.isCastlingMove(), false, false);
     }
 
     public boolean isCastled() {

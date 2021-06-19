@@ -250,7 +250,7 @@ public abstract class Move {
             builder.setPiece(movedPawn);
             builder.setEnPassantPawn(movedPawn);
             builder.setMoveMaker(this.board.currentPlayer().getOpponent().getAlliance());
-            builder.setMoveTransition(this);
+            //builder.setMoveTransition(this);
             return builder.build();
         }
 
@@ -263,9 +263,9 @@ public abstract class Move {
 
     abstract static class CastleMove extends Move {
 
-        final Rook castleRook;
-        final int castleRookStart;
-        final int castleRookDestination;
+        protected final Rook castleRook;
+        protected final int castleRookStart;
+        protected final int castleRookDestination;
 
         CastleMove(final Board board,
                    final Piece pieceMoved,
@@ -273,11 +273,65 @@ public abstract class Move {
                    final Rook castleRook,
                    final int castleRookStart,
                    final int castleRookDestination) {
-            super(board, pieceMoved, destinationCoordinate, isFirstMove);
+            super(board, pieceMoved, destinationCoordinate);
             this.castleRook = castleRook;
             this.castleRookStart = castleRookStart;
             this.castleRookDestination = castleRookDestination;
         }
+
+        Rook getCastleRook() {
+            return this.castleRook;
+        }
+
+        @Override
+        public boolean isCastlingMove() {
+            return true;
+        }
+
+        @Override
+        public Board execute() {
+
+            final Board.Builder builder = new Builder();
+            for (final Piece piece : this.board.currentPlayer().getActivePieces()) {
+                if (!this.movedPiece.equals(piece) && !this.castleRook.equals(piece)) {
+                    builder.setPiece(piece);
+                }
+            }
+
+            // We move the king (by "movePiece" method) to its destination location and the rook.
+            // and we have manually a new rook that's sitting on the castle side.
+            for (final Piece piece : this.board.currentPlayer().getOpponent().getActivePieces()) {
+                builder.setPiece(piece);
+            }
+            builder.setPiece(this.movedPiece.movePiece(this));
+            // TODO look into the 1st move on normal pieces.
+            builder.setPiece(new Rook(this.castleRook.getPieceAlliance(), this.castleRookDestination));
+            builder.setMoveMaker(this.board.currentPlayer().getOpponent().getAlliance());
+
+            return builder.build();
+        }
+
+        @Override
+        public int hashCode() {
+            final int prime = 31;
+            int result = super.hashCode();
+            result = prime * result + this.castleRook.hashCode();
+            result = prime * result + this.castleRookDestination;
+            return result;
+        }
+
+        @Override
+        public boolean equals(final Object other) {
+            if (this == other) {
+                return true;
+            }
+            if (!(other instanceof CastleMove)) {
+                return false;
+            }
+            final CastleMove otherCastleMove = (CastleMove) other;
+            return super.equals(otherCastleMove) && this.castleRook.equals(otherCastleMove.getCastleRook());
+        }
+
     }
 
     public static class KingSideCastleMove
@@ -291,6 +345,28 @@ public abstract class Move {
                                   final int castleRookDestination) {
             super(board, pieceMoved, destinationCoordinate, castleRook, castleRookStart,
                 castleRookDestination);
+        }
+
+        @Override
+        public boolean equals(final Object other) {
+            if (this == other) {
+                return true;
+            }
+            if (!(other instanceof KingSideCastleMove)) {
+                return false;
+            }
+            final KingSideCastleMove otherKingSideCastleMove = (KingSideCastleMove) other;
+            return super.equals(otherKingSideCastleMove) && this.castleRook.equals(otherKingSideCastleMove.getCastleRook());
+        }
+
+        /**
+         * PGM convention for printing out a king side castle.
+         *
+         * @return string 0-0
+         */
+        @Override
+        public String toString() {
+            return "O-O";
         }
     }
 
@@ -306,6 +382,29 @@ public abstract class Move {
              super(board, pieceMoved, destinationCoordinate, castleRook, castleRookStart,
                  rookCastleDestination);
          }
+
+         @Override
+        public boolean equals(final Object other) {
+            if (this == other) {
+                return true;
+            }
+            if (!(other instanceof QueenSideCastleMove)) {
+                return false;
+            }
+            final QueenSideCastleMove otherQueenSideCastleMove = (QueenSideCastleMove) other;
+            return super.equals(otherQueenSideCastleMove) && this.castleRook.equals(otherQueenSideCastleMove.getCastleRook());
+        }
+
+        /**
+         * PGM convention for printing out a Queen side castle.
+         * That's we have subclasses like this.
+         *
+         * @return string 0-0-0
+         */
+        @Override
+        public String toString() {
+            return "O-O-O";
+        }
      }
 
      private static class NullMove
