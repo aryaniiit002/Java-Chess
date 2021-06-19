@@ -34,6 +34,8 @@ public class Table {
 
     private final JFrame gameFrame;
     private final BoardPanel boardPanel;
+    private final Color lightTileColor = Color.decode("#FFFACD");
+    private final Color darkTileColor = Color.decode("#593E1A");
 
     private static final Dimension OUTER_FRAME_DIMENSION = new Dimension(600, 600);
     private static final Dimension BOARD_PANEL_DIMENSION = new Dimension(400, 350);
@@ -74,6 +76,14 @@ public class Table {
         });
         filesMenu.add(openPGN);
 
+        final JMenuItem exitMenuItem = new JMenuItem("EXIT");
+        exitMenuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                System.exit(0);
+            }
+        });
+        filesMenu.add(exitMenuItem);
         return filesMenu;
     }
 
@@ -113,7 +123,23 @@ public class Table {
             validate();
         }
 
+        /**
+         * If we are on 1st, 3rd, 5th or 7th row then we ask if the tileID even or not.
+         * If it's even then color it with a light tile color and it's not color it with dark.
+         * Similarly it flips for 2nd, 4th, 6th and 8th row.
+         */
         private void assignTileColor() {
+            if (BoardUtils.FIRST_ROW[this.tileId] ||
+                BoardUtils.THIRD_ROW[this.tileId] ||
+                BoardUtils.FIFTH_ROW[this.tileId] ||
+                BoardUtils.SEVENTH_ROW[this.tileId]) {
+                setBackground(this.tileId % 2 == 0 ? lightTileColor : darkTileColor);
+            } else if(BoardUtils.SECOND_ROW[this.tileId] ||
+                      BoardUtils.FOURTH_ROW[this.tileId] ||
+                      BoardUtils.SIXTH_ROW[this.tileId]  ||
+                      BoardUtils.EIGHTH_ROW[this.tileId]) {
+                setBackground(this.tileId % 2 != 0 ? lightTileColor : darkTileColor);
+            }
         }
     }
 }
