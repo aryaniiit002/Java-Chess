@@ -46,6 +46,10 @@ public abstract class Piece {
         return pieceAlliance;
     }
 
+    public Alliance getPieceAllegiance() {
+        return this.pieceAlliance;
+    }
+
     // All of the pieces (bishop, knight, queen, pawn, etc.. ) are going to override this list and
     // have their own behavior defined.
     public abstract Collection<Move> calculateLegalMoves(final Board board);

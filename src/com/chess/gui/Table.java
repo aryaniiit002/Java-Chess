@@ -10,17 +10,22 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
+import javax.swing.JCheckBoxMenuItem;
+import javax.swing.JColorChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -35,6 +40,7 @@ import com.chess.engine.board.Move;
 import com.chess.engine.board.Tile;
 import com.chess.engine.pieces.Piece;
 import com.chess.engine.player.MoveTransition;
+import com.google.common.collect.Lists;
 
 public class Table {
 
@@ -45,14 +51,19 @@ public class Table {
     private Tile sourceTile;
     private Tile destinationTile;
     private Piece humanMovedPiece;
+    private BoardDirection boardDirection;
 
-    private final Color lightTileColor = Color.decode("#FFFACD");
-    private final Color darkTileColor = Color.decode("#593E1A");
+    private boolean highlightLegalMoves;
+
+    private Color lightTileColor = Color.decode("#FFFACD");
+    private Color darkTileColor = Color.decode("#593E1A");
     private String pieceIconPath;
 
     private static final Dimension OUTER_FRAME_DIMENSION = new Dimension(600, 600);
     private static final Dimension BOARD_PANEL_DIMENSION = new Dimension(400, 350);
     private static final Dimension TILE_PANEL_DIMENSION = new Dimension(10, 10);
+
+    private static final Table INSTANCE = new Table();
 
     public Table() {
         this.gameFrame = new JFrame("Java-Chess");
@@ -63,8 +74,26 @@ public class Table {
         this.gameFrame.setSize(OUTER_FRAME_DIMENSION);
         this.chessBoard = Board.createStandardBoard();
         this.boardPanel = new BoardPanel();
+        this.boardDirection = BoardDirection.NORMAL;
+        this.highlightLegalMoves = false;
         this.gameFrame.add(this.boardPanel, BorderLayout.CENTER);
         this.gameFrame.setVisible(true);
+    }
+
+    public static Table get() {
+        return INSTANCE;
+    }
+
+    private JFrame getGameFrame() {
+        return this.gameFrame;
+    }
+
+    private Board getGameBoard() {
+        return this.chessBoard;
+    }
+
+    private BoardPanel getBoardPanel() {
+        return this.boardPanel;
     }
 
     private JMenuBar createTableMenuBar() {
@@ -77,6 +106,31 @@ public class Table {
     }
 
     private JMenu createPreferencesMenu() {
+        final JMenu preferencesMenu = new JMenu("Preferences");
+
+        final JMenu flipBoardMenuItem = new JMenu("Flip Board");
+        flipBoardMenuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                boardDirection = BoardDirection.opposite();
+                boardPanel.drawBoard(chessBoard);
+            }
+        });
+        preferencesMenu.add(flipBoardMenuItem);
+        preferencesMenu.addSeparator();
+
+        final JCheckBoxMenuItem legalMoveHighlighterCheckbox =
+            new JCheckBoxMenuItem("Highlight Legal Moves", false);
+        legalMoveHighlighterCheckbox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                highlightLegalMoves = legalMoveHighlighterCheckbox.isSelected();
+            }
+        });
+
+        preferencesMenu.add(legalMoveHighlighterCheckbox);
+
+        return preferencesMenu;
     }
 
     private JMenu createFileMenu() {
@@ -131,6 +185,77 @@ public class Table {
             validate();
             repaint();
         }
+
+        void setTileDarkColor(final Board board,
+                              final Color darkColor) {
+            for (final TilePanel boardTile : boardTiles) {
+                boardTile.setDarkTileColor(darkColor);
+            }
+            drawBoard(board);
+        }
+    }
+
+    enum BoardDirection {
+        NORMAL {
+            @Override
+            List<TilePanel> traverse(final List<TilePanel> boardTiles) {
+                return boardTiles;
+            }
+
+            @Override
+            BoardDirection opposite() {
+                return FLIPPED;
+            }
+        },
+        FLIPPED {
+            @Override
+            List<TilePanel> traverse(final List<TilePanel> boardTiles) {
+                return Lists.reverse(boardTiles);
+            }
+
+            @Override
+            BoardDirection opposite() {
+                return NORMAL;
+            }
+        };
+
+        abstract List<TilePanel> traverse(final List<TilePanel> boardTiles);
+        abstract BoardDirection opposite();
+
+    }
+
+    public static class MoveLog {
+
+        private final List<Move> moves;
+
+        MoveLog() {
+            this.moves = new ArrayList<>();
+        }
+
+        public List<Move> getMoves() {
+            return this.moves;
+        }
+
+        void addMove(final Move move) {
+            this.moves.add(move);
+        }
+
+        public int size() {
+            return this.moves.size();
+        }
+
+        void clear() {
+            this.moves.clear();
+        }
+
+        Move removeMove(final int index) {
+            return this.moves.remove(index);
+        }
+
+        boolean removeMove(final Move move) {
+            return this.moves.remove(move);
+        }
+
     }
 
     /**
@@ -211,6 +336,14 @@ public class Table {
             repaint();
         }
 
+        void setLightTileColor(final Color color) {
+            lightTileColor = color;
+        }
+
+        void setDarkTileColor(final Color color) {
+            darkTileColor = color;
+        }
+
         /**
          * If we are on 1st, 3rd, 5th or 7th row then we ask if the tileID even or not.
          * If it's even then color it with a light tile color and it's not color it with dark.
@@ -243,6 +376,29 @@ public class Table {
                 }
             }
         }
+
+        private void highlightLegals(final Board board) {
+            if (highlightLegalMoves) {
+                for (final Move move : pieceLegalMoves(board)) {
+                    if (move.getDestinationCoordinate() == this.tileId) {
+                        try {
+                            add(new JLabel(new ImageIcon(ImageIO.read(new File("art/misc/green_dot.png")))));
+                        }
+                        catch (final IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+        }
+
+        private Collection<Move> pieceLegalMoves(final Board board) {
+            if(humanMovedPiece != null && humanMovedPiece.getPieceAllegiance() == board.currentPlayer().getAlliance()) {
+                return humanMovedPiece.calculateLegalMoves(board);
+            }
+            return Collections.emptyList();
+        }
+
         private void highlightTileBorder(final Board board) {
             if(humanMovedPiece != null &&
                humanMovedPiece.getPieceAllegiance() == board.currentPlayer().getAlliance() &&
