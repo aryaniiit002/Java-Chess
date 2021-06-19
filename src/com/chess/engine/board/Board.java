@@ -6,6 +6,8 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import com.chess.engine.Alliance;
 import com.chess.engine.pieces.Bishop;
@@ -169,6 +171,11 @@ public final class Board {
 
     public BlackPlayer blackPlayer() {
         return this.blackPlayer;
+    }
+
+    public Collection<Move> getAllLegalMoves() {
+        return Stream.concat(this.whitePlayer.getLegalMoves().stream(),
+                             this.blackPlayer.getLegalMoves().stream()).collect(Collectors.toList());
     }
 
     public static class Builder {
