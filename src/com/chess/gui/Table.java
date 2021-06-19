@@ -7,8 +7,6 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -27,8 +25,6 @@ import javax.swing.JPanel;
 
 import com.chess.engine.board.Board;
 import com.chess.engine.board.BoardUtils;
-import com.chess.engine.board.Move;
-import com.chess.engine.player.MoveTransition;
 
 public class Table {
 
@@ -36,6 +32,7 @@ public class Table {
     private final BoardPanel boardPanel;
     private final Color lightTileColor = Color.decode("#FFFACD");
     private final Color darkTileColor = Color.decode("#593E1A");
+    private String pieceIconPath;
 
     private static final Dimension OUTER_FRAME_DIMENSION = new Dimension(600, 600);
     private static final Dimension BOARD_PANEL_DIMENSION = new Dimension(400, 350);
@@ -44,6 +41,7 @@ public class Table {
     public Table() {
         this.gameFrame = new JFrame("Java-Chess");
         this.gameFrame.setLayout(new BorderLayout());
+        this.pieceIconPath = "art/holywarriors/";
         final JMenuBar tableMenuBar = createTableMenuBar();
         this.gameFrame.setJMenuBar(tableMenuBar);
         this.gameFrame.setSize(OUTER_FRAME_DIMENSION);
@@ -129,16 +127,30 @@ public class Table {
          * Similarly it flips for 2nd, 4th, 6th and 8th row.
          */
         private void assignTileColor() {
-            if (BoardUtils.FIRST_ROW[this.tileId] ||
-                BoardUtils.THIRD_ROW[this.tileId] ||
-                BoardUtils.FIFTH_ROW[this.tileId] ||
-                BoardUtils.SEVENTH_ROW[this.tileId]) {
+            if (BoardUtils.EIGHTH_RANK[this.tileId] ||
+                BoardUtils.SIXTH_RANK[this.tileId] ||
+                BoardUtils.FOURTH_RANK[this.tileId] ||
+                BoardUtils.SECOND_RANK[this.tileId]) {
                 setBackground(this.tileId % 2 == 0 ? lightTileColor : darkTileColor);
-            } else if(BoardUtils.SECOND_ROW[this.tileId] ||
-                      BoardUtils.FOURTH_ROW[this.tileId] ||
-                      BoardUtils.SIXTH_ROW[this.tileId]  ||
-                      BoardUtils.EIGHTH_ROW[this.tileId]) {
+            } else if(BoardUtils.SEVENTH_RANK[this.tileId] ||
+                      BoardUtils.FIFTH_RANK[this.tileId] ||
+                      BoardUtils.THIRD_RANK[this.tileId]  ||
+                      BoardUtils.FIRST_RANK[this.tileId]) {
                 setBackground(this.tileId % 2 != 0 ? lightTileColor : darkTileColor);
+            }
+        }
+
+        private void assignTilePieceIcon(final Board board) {
+            this.removeAll();
+            if(board.getTile(this.tileId).isTileOccupied()) {
+                try{
+                    final BufferedImage image = ImageIO.read(new File(pieceIconPath +
+                            board.getTile(this.tileId).getPiece().getPieceAlliance().toString().substring(0, 1)
+                            + "" + board.getTile(this.tileId).getPiece().toString() + ".gif"));
+                    add(new JLabel(new ImageIcon(image)));
+                } catch(final IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
