@@ -9,6 +9,7 @@ import com.chess.engine.Alliance;
 import com.chess.engine.board.Board;
 import com.chess.engine.board.BoardUtils;
 import com.chess.engine.board.Move;
+import com.chess.engine.board.Move.KingSideCastleMove;
 import com.chess.engine.board.Tile;
 import com.chess.engine.pieces.Piece;
 import com.chess.engine.pieces.Rook;
@@ -36,11 +37,11 @@ public class WhitePlayer extends Player {
     }
 
     @Override
-    protected Collection<Move> calculateKingCastles(Collection<Move> playerLegals, Collection<Move> opponentLegals) {
+    protected Collection<Move> calculateKingCastles(final Collection<Move> playerLegals,
+                                                    final Collection<Move> opponentLegals) {
         if (!hasCastleOpportunities()) {
             return Collections.emptyList();
         }
-
         final List<Move> kingCastles = new ArrayList<>();
 
         if (this.playerKing.isFirstMove() && this.playerKing.getPiecePosition() == 60 && !this.isInCheck()) {
@@ -48,18 +49,19 @@ public class WhitePlayer extends Player {
             //whites king side castle
             if (!this.board.getTile(61).isTileOccupied()
                 && !this.board.getTile(62).isTileOccupied()) {
-
                 final Tile rookTile = this.board.getTile(63);
 
                 if (rookTile.isTileOccupied() && rookTile.getPiece().isFirstMove()) {
-
                     if (Player.calculateAttacksOnTile(61, opponentLegals).isEmpty() &&
                         Player.calculateAttacksOnTile(62, opponentLegals).isEmpty() &&
                         rookTile.getPiece().getPieceType().isRook()) {
                         /*if(!BoardUtils.isKingPawnTrap(this.board, this.playerKing, 52)) {
                             kingCastles.add(new KingSideCastleMove(this.board, this.playerKing, 62, (Rook) kingSideRook, kingSideRook.getPiecePosition(), 61));
                         }*/
-                        kingCastles.add(null);
+                        kingCastles.add(new KingSideCastleMove(this.board, this.playerKing,
+                                                62,
+                                                (Rook)rookTile.getPiece(), rookTile.getTileCoordinate(),
+                                                61));
                     }
                 }
             }
@@ -71,8 +73,10 @@ public class WhitePlayer extends Player {
 
                 final Tile queenSideRook = this.board.getTile(56);
                 if (queenSideRook.isTileOccupied() && queenSideRook.getPiece().isFirstMove()) {
-
-                    kingCastles.add(null);
+                    kingCastles.add(new KingSideCastleMove(this.board, this.playerKing,
+                                            58,
+                                            (Rook)queenSideRook.getPiece(), queenSideRook.getTileCoordinate(),
+                                            59));
                     /*if(Player.calculateAttacksOnTile(58, opponentLegals).isEmpty() &&
                        Player.calculateAttacksOnTile(59, opponentLegals).isEmpty() &&
                         queenSideRook.getPieceType() == ROOK) {

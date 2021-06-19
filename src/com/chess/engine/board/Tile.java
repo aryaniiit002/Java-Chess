@@ -43,7 +43,7 @@ public abstract class Tile {
         this.tileCoordinate = tileCoordinate;
     }
 
-        public int getTileCoordinate() {
+    public int getTileCoordinate() {
         return tileCoordinate;
     }
 
