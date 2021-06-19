@@ -36,7 +36,7 @@ public abstract class Player {
         return this.legalMoves;
     }
 
-    private static Collection<Move> calculateAttacksOnTile(final int piecePosition,
+    protected static Collection<Move> calculateAttacksOnTile(final int piecePosition,
                                                    final Collection<Move> moves) {
         return moves.stream()
                     .filter(move -> move.getDestinationCoordinate() == piecePosition)
@@ -53,6 +53,10 @@ public abstract class Player {
             }
         }
         throw new RuntimeException("Should not reach here! Not a valid board!!");
+    }
+
+    public boolean isCastled() {
+        return this.playerKing.isCastled();
     }
 
     public boolean isMoveLegal(final Move move) {
@@ -88,10 +92,6 @@ public abstract class Player {
         return false;
     }
 
-    public boolean isCastled() {
-        return false;
-    }
-
     /**
      * We come here to ask if the move is illegal or not part of collection of legal moves that the player has then
      * do the move transition that your return does not take us to new board, it returns the same board and
@@ -123,4 +123,9 @@ public abstract class Player {
     public abstract Player getOpponent();
     protected abstract Collection<Move> calculateKingCastles(Collection<Move> playerLegals,
                                                              Collection<Move> opponentLegals);
+
+    protected boolean hasCastleOpportunities() {
+        return !this.isInCheck && !this.playerKing.isCastled() &&
+                (this.playerKing.isKingSideCastleCapable() || this.playerKing.isQueenSideCastleCapable());
+    }
 }

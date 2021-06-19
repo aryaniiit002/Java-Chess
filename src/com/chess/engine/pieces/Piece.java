@@ -79,10 +79,20 @@ public abstract class Piece {
             public boolean isKing() {
                 return false;
             }
+
+            @Override
+            public boolean isRook() {
+                return false;
+            }
         },
         KNIGHT(300, "N") {
             @Override
             public boolean isKing() {
+                return false;
+            }
+
+            @Override
+            public boolean isRook() {
                 return false;
             }
         },
@@ -91,11 +101,21 @@ public abstract class Piece {
             public boolean isKing() {
                 return false;
             }
+
+            @Override
+            public boolean isRook() {
+                return false;
+            }
         },
         ROOK(500, "R") {
             @Override
             public boolean isKing() {
                 return false;
+            }
+
+            @Override
+            public boolean isRook() {
+                return true;
             }
         },
         QUEEN(900, "Q") {
@@ -103,10 +123,20 @@ public abstract class Piece {
             public boolean isKing() {
                 return false;
             }
+
+            @Override
+            public boolean isRook() {
+                return true;
+            }
         },
         KING(10000, "K") {
             @Override
             public boolean isKing() {
+                return true;
+            }
+
+            @Override
+            public boolean isRook() {
                 return true;
             }
         };
@@ -130,5 +160,7 @@ public abstract class Piece {
         }
 
         public abstract boolean isKing();
+
+        public abstract boolean isRook();
     }
 }

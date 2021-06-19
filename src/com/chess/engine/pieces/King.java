@@ -14,19 +14,37 @@ import com.google.common.collect.ImmutableList;
 import static com.chess.engine.board.Move.*;
 
 public class King extends Piece{
+
+    private static final int[] CANDIDATE_MOVE_COORDINATES = { -9, -8, -7, -1, 1, 7, 8, 9 };
+    private final boolean isCastled;
+    private final boolean kingSideCastleCapable;
+    private final boolean queenSideCastleCapable;
+
     /* Initial placement of the king.
      * Possible movements of the unhindered king piece.
      * The king's movement may be hindered by other pieces.
      * The king can make a special move "Castling".
      */
-    public King(final Alliance pieceAlliance, final int piecePosition, final boolean isFirstMove) {
-        super(PieceType.KING, piecePosition, pieceAlliance, isFirstMove);
+    public King(final Alliance alliance,
+                final int piecePosition,
+                final boolean kingSideCastleCapable,
+                final boolean queenSideCastleCapable) {
+        super(PieceType.KING, piecePosition, alliance, true);
+        this.isCastled = false;
+        this.kingSideCastleCapable = kingSideCastleCapable;
+        this.queenSideCastleCapable = queenSideCastleCapable;
     }
 
-    private static final int[] CANDIDATE_MOVE_COORDINATES = { -9, -8, -7, -1, 1, 7, 8, 9 };
-
-    public King(Alliance pieceAlliance, int destinationCoordinate) {
-        super(PieceType.KING, destinationCoordinate, pieceAlliance, true);
+    public King(final Alliance alliance,
+                final int piecePosition,
+                final boolean isFirstMove,
+                final boolean isCastled,
+                final boolean kingSideCastleCapable,
+                final boolean queenSideCastleCapable) {
+        super(PieceType.KING, piecePosition, alliance, isFirstMove);
+        this.isCastled = isCastled;
+        this.kingSideCastleCapable = kingSideCastleCapable;
+        this.queenSideCastleCapable = queenSideCastleCapable;
     }
 
     @Override
@@ -59,9 +77,21 @@ public class King extends Piece{
     }
 
     @Override
-    public King movePiece(Move move) {
+    public King movePiece(final Move move) {
         // this will create a new King in the new location.
-        return new King(move.getMovedPiece().getPieceAlliance(), move.getDestinationCoordinate());
+        return new King(this.pieceAlliance, move.getDestinationCoordinate(), false, move.isCastlingMove(), false, false);
+    }
+
+    public boolean isCastled() {
+        return this.isCastled;
+    }
+
+    public boolean isKingSideCastleCapable() {
+        return this.kingSideCastleCapable;
+    }
+
+    public boolean isQueenSideCastleCapable() {
+        return this.queenSideCastleCapable;
     }
 
     @Override

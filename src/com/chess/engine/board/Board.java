@@ -38,7 +38,7 @@ public final class Board {
         this.gameBoard = createGameBoard(builder);
         this.whitePieces = calculateActivePieces(this.gameBoard, Alliance.WHITE);
         this.blackPieces = calculateActivePieces(this.gameBoard, Alliance.BLACK);
-        this.enPassantPawn = builder.enPassantPawn;
+        this.enPassantPawn = builder.getEnPassantPawn();
         final Collection<Move> whiteStandardMoves = calculateLegalMoves(this.whitePieces);
         final Collection<Move> blackStandardMoves = calculateLegalMoves(this.blackPieces);
         this.whitePlayer = new WhitePlayer(this, whiteStandardMoves, blackStandardMoves);
@@ -82,14 +82,6 @@ public final class Board {
         }
         return ImmutableList.copyOf(legalMoves);
     }
-
-/*
-    private static Collection<Piece> calculateActivePieces(final Builder builder,
-                                                           final Alliance alliance) {
-        return builder.boardConfig.values().stream()
-               .filter(piece -> piece.getPieceAllegiance() == alliance)
-               .collect(Collectors.toList());
-    }*/
 
     private static Collection<Piece> calculateActivePieces(final List<Tile> gameBoard,
                                                            final Alliance alliance) {
@@ -188,7 +180,7 @@ public final class Board {
 
         private final Map<Integer, Piece> boardConfig;
         private Alliance nextMoveMaker; // To keep track of person to move (person whose turn it is to move on chessBoard)
-        Pawn enPassantPawn;
+        private Pawn enPassantPawn;
 
         public Builder() {
             this.boardConfig = new HashMap<>(32, 1.0f);
@@ -204,7 +196,7 @@ public final class Board {
             return this;
         }
 
-        public Void setEnPassantPawn(final Pawn enPassantPawn) {
+        public void setEnPassantPawn(final Pawn enPassantPawn) {
             this.enPassantPawn = enPassantPawn;
         }
 
@@ -219,7 +211,8 @@ public final class Board {
             return new Board(this);
         }
 
-        public void setEnPassantPawn(Pawn movedPawn) {
+        public Pawn getEnPassantPawn() {
+            return enPassantPawn;
         }
     }
 }
