@@ -27,6 +27,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 import com.chess.engine.board.Board;
 import com.chess.engine.board.BoardUtils;
@@ -39,7 +40,7 @@ public class Table {
 
     private final JFrame gameFrame;
     private final BoardPanel boardPanel;
-    private final Board chessBoard;
+    private Board chessBoard;
 
     private Tile sourceTile;
     private Tile destinationTile;
@@ -120,6 +121,16 @@ public class Table {
             setBackground(Color.decode("#8B4726"));
             validate();
         }
+
+        public void drawBoard(final Board board) {
+            removeAll();
+            for(final TilePanel tilePanel : boardTiles) {
+                tilePanel.drawTiles(board);
+                add(tilePanel);
+            }
+            validate();
+            repaint();
+        }
     }
 
     /**
@@ -143,6 +154,7 @@ public class Table {
                     if (isRightMouseButton(event)) {
                         sourceTile = null;
                         humanMovedPiece = null;
+                        destinationTile = null;
                     } else if (isLeftMouseButton(event)) {
                         if (sourceTile == null) {
                             // First click
@@ -154,15 +166,22 @@ public class Table {
                         } else {
                             // Second click
                             destinationTile = chessBoard.getTile(tileId);
-                            //final Move move = MoveFactory.createMove(chessBoard, sourceTile.getPiecePosition(), tileId);
-                            final Move move = null;
+                            final Move move = Move.MoveFactory.createMove(chessBoard, sourceTile.getTileCoordinate(),
+                                tileId);
                             final MoveTransition transition = chessBoard.currentPlayer().makeMove(move);
                             if (transition.getMoveStatus().isDone()) {
-                                //chessBoard = transition.getToBoard();
+                                chessBoard = transition.getTransitionBoard();
                             }
                             sourceTile = null;
+                            destinationTile = null;
                             humanMovedPiece = null;
                         }
+                        SwingUtilities.invokeLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                boardPanel.drawBoard();
+                            }
+                        });
                     }
                 }
 
@@ -183,6 +202,13 @@ public class Table {
                 }
             });
             validate();
+        }
+
+        void drawTile(final Board board) {
+            assignTileColor();
+            assignTilePieceIcon(board);
+            validate();
+            repaint();
         }
 
         /**

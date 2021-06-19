@@ -1,7 +1,5 @@
 package com.chess.engine.player;
 
-import java.util.concurrent.Future;
-
 import com.chess.engine.board.Board;
 import com.chess.engine.board.Move;
 
@@ -10,7 +8,8 @@ public class MoveTransition {
     private final Move move;
     private final MoveStatus moveStatus;
 
-    public MoveTransition(Board transitionBoard, Move move, MoveStatus moveStatus) {
+    public MoveTransition(Board transitionBoard,
+                          Move move, MoveStatus moveStatus) {
         this.transitionBoard = transitionBoard;
         this.move = move;
         this.moveStatus = moveStatus;
@@ -18,5 +17,9 @@ public class MoveTransition {
 
     public MoveStatus getMoveStatus() {
         return this.moveStatus;
+    }
+
+    public Board getTransitionBoard() {
+        return this.transitionBoard;
     }
 }
