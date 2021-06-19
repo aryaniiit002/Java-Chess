@@ -1,5 +1,8 @@
 package com.chess.gui;
 
+import static javax.swing.SwingUtilities.isLeftMouseButton;
+import static javax.swing.SwingUtilities.isRightMouseButton;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -7,6 +10,8 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -25,12 +30,20 @@ import javax.swing.JPanel;
 
 import com.chess.engine.board.Board;
 import com.chess.engine.board.BoardUtils;
+import com.chess.engine.board.Move;
+import com.chess.engine.board.Tile;
+import com.chess.engine.pieces.Piece;
+import com.chess.engine.player.MoveTransition;
 
 public class Table {
 
     private final JFrame gameFrame;
     private final BoardPanel boardPanel;
     private final Board chessBoard;
+
+    private Tile sourceTile;
+    private Tile destinationTile;
+    private Piece humanMovedPiece;
 
     private final Color lightTileColor = Color.decode("#FFFACD");
     private final Color darkTileColor = Color.decode("#593E1A");
@@ -122,6 +135,53 @@ public class Table {
             setPreferredSize(TILE_PANEL_DIMENSION);
             assignTileColor();
             assignTilePieceIcon(chessBoard);
+            highlightTileBorder(chessBoard);
+            addMouseListener(new MouseListener() {
+                @Override
+                public void mouseClicked(final MouseEvent event) {
+
+                    if (isRightMouseButton(event)) {
+                        sourceTile = null;
+                        humanMovedPiece = null;
+                    } else if (isLeftMouseButton(event)) {
+                        if (sourceTile == null) {
+                            // First click
+                            sourceTile = chessBoard.getTile(tileId);
+                            humanMovedPiece = sourceTile.getPiece();
+                            if (humanMovedPiece == null) {
+                                sourceTile = null;
+                            }
+                        } else {
+                            // Second click
+                            destinationTile = chessBoard.getTile(tileId);
+                            //final Move move = MoveFactory.createMove(chessBoard, sourceTile.getPiecePosition(), tileId);
+                            final Move move = null;
+                            final MoveTransition transition = chessBoard.currentPlayer().makeMove(move);
+                            if (transition.getMoveStatus().isDone()) {
+                                //chessBoard = transition.getToBoard();
+                            }
+                            sourceTile = null;
+                            humanMovedPiece = null;
+                        }
+                    }
+                }
+
+                @Override
+                public void mouseExited(final MouseEvent e) {
+                }
+
+                @Override
+                public void mouseEntered(final MouseEvent e) {
+                }
+
+                @Override
+                public void mouseReleased(final MouseEvent e) {
+                }
+
+                @Override
+                public void mousePressed(final MouseEvent e) {
+                }
+            });
             validate();
         }
 
@@ -155,6 +215,15 @@ public class Table {
                 } catch(final IOException e) {
                     e.printStackTrace();
                 }
+            }
+        }
+        private void highlightTileBorder(final Board board) {
+            if(humanMovedPiece != null &&
+               humanMovedPiece.getPieceAllegiance() == board.currentPlayer().getAlliance() &&
+               humanMovedPiece.getPiecePosition() == this.tileId) {
+                setBorder(BorderFactory.createLineBorder(Color.cyan));
+            } else {
+                setBorder(BorderFactory.createLineBorder(Color.GRAY));
             }
         }
     }
