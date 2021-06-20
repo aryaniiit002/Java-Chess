@@ -46,6 +46,10 @@ public abstract class Piece {
         return pieceAlliance;
     }
 
+    public int getPieceValue() {
+        return this.pieceType.getPieceValue();
+    }
+
     public Alliance getPieceAllegiance() {
         return this.pieceAlliance;
     }

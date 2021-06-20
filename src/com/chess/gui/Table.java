@@ -226,6 +226,7 @@ public class Table {
 
         private final List<Move> moves;
 
+        // All these methods are basically just map methods that are available on the list interface.
         MoveLog() {
             this.moves = new ArrayList<>();
         }

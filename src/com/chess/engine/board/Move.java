@@ -70,6 +70,13 @@ public abstract class Move {
         return false;
     }
 
+    public boolean isAttack() {
+        return false;
+    }
+
+    public Piece getAttackedPiece() {
+        return null;
+    }
 
     /**
      * We use the board builder it's gonna help us materialize a new board to return from
