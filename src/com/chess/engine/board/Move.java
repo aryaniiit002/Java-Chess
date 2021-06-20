@@ -7,7 +7,7 @@ import com.chess.engine.pieces.Rook;
 
 public abstract class Move {
     protected final Board board;
-    private final int destinationCoordinate;
+    protected final int destinationCoordinate;
     protected final Piece movedPiece;
     protected final boolean isFirstMove;
 
@@ -65,6 +65,11 @@ public abstract class Move {
         return this.movedPiece;
     }
 
+    public boolean isCastlingMove() {
+        return false;
+    }
+
+
     /**
      * We use the board builder it's gonna help us materialize a new board to return from
      * execute. we will traverse through all of the current player, through all the pieces and
@@ -100,7 +105,7 @@ public abstract class Move {
         public MajorMove(final Board board,
                                final Piece pieceMoved,
                                final int destinationCoordinate) {
-            super(board, pieceMoved, destinationCoordinate, isFirstMove);
+            super(board, pieceMoved, destinationCoordinate);
         }
 
     }
@@ -112,7 +117,7 @@ public abstract class Move {
                                final Piece pieceMoved,
                                final int destinationCoordinate,
                           final Piece attackedPiece) {
-            super(board, pieceMoved, destinationCoordinate, isFirstMove);
+            super(board, pieceMoved, destinationCoordinate);
             this.attackedPiece = attackedPiece;
         }
 
@@ -156,18 +161,8 @@ public abstract class Move {
         public PawnMove(final Board board,
                         final Piece pieceMoved,
                         final int destinationCoordinate) {
-            super(board, pieceMoved, destinationCoordinate, isFirstMove);
+            super(board, pieceMoved, destinationCoordinate);
         }
-/*
-        @Override
-        public boolean equals(final Object other) {
-            return this == other || other instanceof PawnMove && super.equals(other);
-        }
-
-        @Override
-        public String toString() {
-            return BoardUtils.INSTANCE.getPositionAtCoordinate(this.destinationCoordinate);
-        }*/
     }
 
     public static class PawnAttackMove extends AttackMove {
@@ -178,18 +173,6 @@ public abstract class Move {
                               final Piece pieceAttacked) {
             super(board, pieceMoved, destinationCoordinate, pieceAttacked);
         }
-/*
-        @Override
-        public boolean equals(final Object other) {
-            return this == other || other instanceof PawnAttackMove && super.equals(other);
-        }
-
-        @Override
-        public String toString() {
-            return BoardUtils.INSTANCE.getPositionAtCoordinate(this.movedPiece.getPiecePosition()).substring(0, 1) + "x" +
-                   BoardUtils.INSTANCE.getPositionAtCoordinate(this.destinationCoordinate);
-        }
-        */
     }
 
     public static class PawnEnPassantAttack extends PawnAttackMove {
@@ -256,7 +239,7 @@ public abstract class Move {
 
         @Override
         public String toString() {
-            return BoardUtils.INSTANCE.getPositionAtCoordinate(this.destinationCoordinate);
+                return BoardUtils.getPositionAtCoordinate(this.destinationCoordinate);
         }
 
     }

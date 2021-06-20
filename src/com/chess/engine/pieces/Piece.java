@@ -9,7 +9,7 @@ import com.chess.engine.board.Move;
 public abstract class Piece {
     private final PieceType pieceType;
     private final int piecePosition;
-    private final Alliance pieceAlliance; // Alliance is an Enum.
+    protected final Alliance pieceAlliance; // Alliance is an Enum.
     private final boolean isFirstMove;
     private final int cachedHashCode;
 

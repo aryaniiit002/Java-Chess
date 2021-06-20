@@ -102,19 +102,16 @@ public class Table {
         return tableMenuBar;
     }
 
-    private JMenu createOptionsMenu() {
+    private void createOptionsMenu() {
     }
 
     private JMenu createPreferencesMenu() {
         final JMenu preferencesMenu = new JMenu("Preferences");
 
         final JMenu flipBoardMenuItem = new JMenu("Flip Board");
-        flipBoardMenuItem.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                boardDirection = BoardDirection.opposite();
-                boardPanel.drawBoard(chessBoard);
-            }
+        flipBoardMenuItem.addActionListener(e -> {
+            boardDirection = boardDirection.opposite();
+            boardPanel.drawBoard(chessBoard);
         });
         preferencesMenu.add(flipBoardMenuItem);
         preferencesMenu.addSeparator();
@@ -179,7 +176,7 @@ public class Table {
         public void drawBoard(final Board board) {
             removeAll();
             for(final TilePanel tilePanel : boardTiles) {
-                tilePanel.drawTiles(board);
+                tilePanel.drawTile(board);
                 add(tilePanel);
             }
             validate();
@@ -304,7 +301,7 @@ public class Table {
                         SwingUtilities.invokeLater(new Runnable() {
                             @Override
                             public void run() {
-                                boardPanel.drawBoard();
+                                boardPanel.drawBoard(chessBoard);
                             }
                         });
                     }

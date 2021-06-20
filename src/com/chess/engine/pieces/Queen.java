@@ -41,11 +41,11 @@ public class Queen extends Piece{
                 candidateDestinationCoordinate += currentCandidateOffset;
                 if (BoardUtils.isValidTileCoordinate(candidateDestinationCoordinate)) {
                     final Tile candidateDestinationTile = board.getTile(candidateDestinationCoordinate);
-                    if (candidateDestinationTile.isTileOccupied()) {
+                    final Piece pieceAtDestination = candidateDestinationTile.getPiece();
+                    if (candidateDestinationTile.isTileOccupied() || pieceAtDestination == null) {
                         legalMoves.add(new MajorMove(board, this, candidateDestinationCoordinate));
                     }
                     else {
-                        final Piece pieceAtDestination = candidateDestinationTile.getPiece();
                         final Alliance pieceAtDestinationAllegiance = pieceAtDestination.getPieceAlliance();
                         if (this.getPieceAlliance() != pieceAtDestinationAllegiance) {
                             legalMoves.add(new AttackMove(board, this, candidateDestinationCoordinate,
