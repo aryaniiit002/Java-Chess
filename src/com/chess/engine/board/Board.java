@@ -31,6 +31,7 @@ public final class Board {
     private final BlackPlayer blackPlayer;
     private final Player currentPlayer;
     private final Pawn enPassantPawn;
+    private final Move transitionMove;
 
     private static final Board STANDARD_BOARD = createStandardBoardImpl();
 
@@ -44,6 +45,7 @@ public final class Board {
         this.whitePlayer = new WhitePlayer(this, whiteStandardMoves, blackStandardMoves);
         this.blackPlayer = new BlackPlayer(this, whiteStandardMoves, blackStandardMoves);
         this.currentPlayer = builder.nextMoveMaker.choosePlayerByAlliance(this.whitePlayer, this.blackPlayer);
+        this.transitionMove = builder.transitionMove != null ? builder.transitionMove : Move.MoveFactory.getNullMove();
     }
 
     @Override
@@ -176,11 +178,17 @@ public final class Board {
                              this.blackPlayer.getLegalMoves().stream()).collect(Collectors.toList());
     }
 
+    public Collection<Piece> getAllPieces() {
+        return Stream.concat(this.whitePieces.stream(),
+                             this.blackPieces.stream()).collect(Collectors.toList());
+    }
+
     public static class Builder {
 
         private final Map<Integer, Piece> boardConfig;
         private Alliance nextMoveMaker; // To keep track of person to move (person whose turn it is to move on chessBoard)
         private Pawn enPassantPawn;
+        Move transitionMove;
 
         public Builder() {
             this.boardConfig = new HashMap<>(32, 1.0f);
@@ -213,6 +221,11 @@ public final class Board {
 
         public Pawn getEnPassantPawn() {
             return enPassantPawn;
+        }
+
+        public Builder setMoveTransition(final Move transitionMove) {
+            this.transitionMove = transitionMove;
+            return this;
         }
     }
 }
