@@ -156,15 +156,15 @@ public abstract class Piece {
             return this.value;
         }
 
-        @Override
-        public String toString() {
-            return this.pieceName;
-        }
-
         PieceType(final int val,
                   final String pieceName) {
             this.value = val;
             this.pieceName = pieceName;
+        }
+
+        @Override
+        public String toString() {
+            return this.pieceName;
         }
 
         public abstract boolean isKing();
