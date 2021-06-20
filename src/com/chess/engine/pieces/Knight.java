@@ -9,6 +9,8 @@ import com.chess.engine.board.Board;
 import com.chess.engine.board.BoardUtils;
 
 import com.chess.engine.board.Move;
+import com.chess.engine.board.Move.MajorAttackMove;
+import com.chess.engine.board.Move.MajorMove;
 import com.chess.engine.board.Tile;
 import com.google.common.collect.ImmutableList;
 
@@ -46,7 +48,7 @@ public final class Knight extends Piece {
                 }
                 final Tile candidateDestinationTile = board.getTile(candidateDestinationCoordinate);
                  if(!candidateDestinationTile.isTileOccupied()) {
-                     legalMoves.add(new Move.MajorMove(board, this, candidateDestinationCoordinate));
+                     legalMoves.add(new MajorMove(board, this, candidateDestinationCoordinate));
                  }
                  else {
                      final Piece pieceAtDestination = candidateDestinationTile.getPiece();
@@ -54,7 +56,7 @@ public final class Knight extends Piece {
 
                      // If this is true then we'd know that piece is enemy piece.
                      if(this.getPieceAlliance() != pieceAtDestinationAllegiance) {
-                         legalMoves.add(new Move.AttackMove(board, this, candidateDestinationCoordinate,
+                         legalMoves.add(new MajorAttackMove(board, this, candidateDestinationCoordinate,
                              pieceAtDestination));
                      }
                  }

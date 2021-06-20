@@ -67,7 +67,7 @@ public class King extends Piece{
 
                      // If this is true then we'd know that piece is enemy piece.
                      if(this.getPieceAlliance() != pieceAtDestinationAllegiance) {
-                         legalMoves.add(new AttackMove(board, this, candidateDestinationCoordinate,
+                         legalMoves.add(new MajorAttackMove(board, this, candidateDestinationCoordinate,
                              pieceAtDestination));
                      }
                  }

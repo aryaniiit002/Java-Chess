@@ -342,6 +342,8 @@ public class Table {
         void drawTile(final Board board) {
             assignTileColor();
             assignTilePieceIcon(board);
+            highlightTileBorder(board);
+            highlightLegals(board);
             validate();
             repaint();
         }
