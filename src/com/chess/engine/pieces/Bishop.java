@@ -21,6 +21,10 @@ public class Bishop extends Piece{
         super(PieceType.BISHOP, piecePossition, pieceAlliance, true);
     }
 
+    public Bishop(final Alliance pieceAlliance, final int piecePossition, final boolean isFirstMove) {
+        super(PieceType.BISHOP, piecePossition, pieceAlliance, isFirstMove);
+    }
+
     @Override
     public Collection<Move> calculateLegalMoves(final Board board) {
         final List<Move> legalMoves = new ArrayList<>();

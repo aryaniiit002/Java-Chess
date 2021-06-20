@@ -19,6 +19,10 @@ public class Queen extends Piece{
         super(PieceType.QUEEN, piecePosition, pieceAlliance, true);
     }
 
+    public Queen(final Alliance pieceAlliance, final int piecePossition, final boolean isFirstMove) {
+        super(PieceType.QUEEN, piecePossition, pieceAlliance, isFirstMove);
+    }
+
     private static final int[] CANDIDATE_MOVE_COORDINATES = { -9, -8, -7, -1, 1, 7, 8, 9 };
 
     /**

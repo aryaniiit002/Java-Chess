@@ -2,9 +2,9 @@ package com.chess.engine.board;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
-
-import com.sun.org.apache.xpath.internal.operations.Bool;
+import java.util.Map;
 
 public final class BoardUtils {
 
@@ -26,6 +26,7 @@ public final class BoardUtils {
     public static final Boolean[] SECOND_RANK = initRow(48);
     public static final Boolean[] FIRST_RANK = initRow(56);
     public static final List<String> ALGEBRAIC_NOTATION = initializeAlgebraicNotation();
+    public final Map<String, Integer> POSITION_TO_COORDINATE = initializePositionToCoordinateMap();
 
     public static final int START_TILE_INDEX = 0;
     public static final int NUM_TILES_PER_ROW = 8;
@@ -63,6 +64,14 @@ public final class BoardUtils {
         return coordinate >= 0 && coordinate < NUM_TILES;
     }
 
+    private static Map<String, Integer> initializePositionToCoordinateMap() {
+        final Map<String, Integer> positionToCoordinate = new HashMap<>();
+        for (int i = START_TILE_INDEX; i < NUM_TILES; i++) {
+            positionToCoordinate.put(ALGEBRAIC_NOTATION.get(i), i);
+        }
+        return Collections.unmodifiableMap(positionToCoordinate);
+    }
+
     private static List<String> initializeAlgebraicNotation() {
         return Collections.unmodifiableList(Arrays.asList(
                 "a8", "b8", "c8", "d8", "e8", "f8", "g8", "h8",
@@ -73,6 +82,10 @@ public final class BoardUtils {
                 "a3", "b3", "c3", "d3", "e3", "f3", "g3", "h3",
                 "a2", "b2", "c2", "d2", "e2", "f2", "g2", "h2",
                 "a1", "b1", "c1", "d1", "e1", "f1", "g1", "h1"));
+    }
+
+    public int getCoordinateAtPosition(final String position) {
+        return POSITION_TO_COORDINATE.get(position);
     }
 
     public static String getPositionAtCoordinate(final int coordinate) {

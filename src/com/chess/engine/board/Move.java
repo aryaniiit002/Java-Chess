@@ -49,7 +49,8 @@ public abstract class Move {
             return false;
         }
         final Move otherMove = (Move) other;
-        return getDestinationCoordinate() == otherMove.getDestinationCoordinate() &&
+        return getCurrentCoordinate() == otherMove.getCurrentCoordinate() &&
+               getDestinationCoordinate() == otherMove.getDestinationCoordinate() &&
                getMovedPiece().equals(otherMove.getMovedPiece());
     }
 
@@ -108,6 +109,16 @@ public abstract class Move {
             super(board, pieceMoved, destinationCoordinate);
         }
 
+        @Override
+        public boolean equals(final Object other) {
+            return this == other || other instanceof MajorMove && super.equals(other);
+        }
+
+        @Override
+        public String toString() {
+            return movedPiece.getPieceType().toString() +
+                   BoardUtils.getPositionAtCoordinate(this.destinationCoordinate);
+        }
     }
 
     public static class AttackMove extends Move {
