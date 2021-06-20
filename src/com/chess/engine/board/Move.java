@@ -393,7 +393,8 @@ public abstract class Move {
                 return false;
             }
             final QueenSideCastleMove otherQueenSideCastleMove = (QueenSideCastleMove) other;
-            return super.equals(otherQueenSideCastleMove) && this.castleRook.equals(otherQueenSideCastleMove.getCastleRook());
+            return super.equals(otherQueenSideCastleMove) &&
+                this.castleRook.equals(otherQueenSideCastleMove.getCastleRook());
         }
 
         /**
