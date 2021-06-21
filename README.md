@@ -1,21 +1,19 @@
 # Java-Chess
 
-### Chess Engine with BDD Testing Methods and AI .
+### Chess Engine with BDD Testing Methods and AI.
+Building chess engine from scratch in the java programming language.
 
 Objective was to develop and test a bug-free standalone game in Java, complete with a GUI and game logic components.
 
-This program is a chess game. The user may play against a friend or the computer.
+We can set it up as human vs human or human vs computer or even computer vs computer.
 
 GUI inspired by: https://en.lichess.org/
-
-## Technology
-
-This game is built using core Java, Java Swing GUI libraries and the jUnit test suite. It uses custom drawing for game components and self-programmed logic for checkmate detection. The code is modular, standalone and object-oriented.
 
 ## Testing Methods
 
 #### Test-driven development
-#### Behaviour-Driven Development {work In Progress}
+#### Behaviour-Driven Development  
+{work In Progress}
 
 ## How it works?
 
@@ -25,7 +23,34 @@ The GUI takes the current state and displays it on the screen. The GUI allows dr
 
 ***Focus of this engine is simplicity and readability. This is by no means the optimal way to build the chess engine.***
 
-{Work In Progress}
+## Technology
+
+This game is built using core Java, Java Swing GUI libraries and the jUnit test suite. It uses custom drawing for game components and self-programmed logic for checkmate detection. The code is modular, standalone and object-oriented.
+
+
+### [MINIMAX](https://en.wikipedia.org/wiki/Minimax)
+Basically I have built a working rule engine for chess, build a basic graphical user interface using Swing.  
+We build a very simplistic that uses _Minimax_ algorithm and a simple evaluation routine and plugged that into UI.
+
+### [Portable Game Notation](https://en.wikipedia.org/wiki/Portable_Game_Notation)
+We moved into _PGN_ and fend file formats to build a database, and we can load games that are in
+progress using standard chess notations.
+
+### [FEN File Format](https://en.wikipedia.org/wiki/Forsyth%E2%80%93Edwards_Notation) 
+FEN , which is just a standard notation for describing a particular board position in game of chess.
+
+This is useful when we want to analyse a game in any position and without having to play out all the moves that took place in that game. 
+
+### AI Functioning
+
+In brief -  
+The AI that plays against the human evaluates all possible moves made by either player up to a certain level of depth.
+
+The AI evaluates each position by giving it a score. The higher the value of the score, the more favourable a position is for white, and the lower the value of the score, the more favourable the position is for black.
+
+Knowing that white will try to get the score to be higher and black will try to get the score to be lower, the AI assumes best play from either side as it traverses up the search tree and chooses the best move to be played.
+
+A problem that may arise is the number of postions that need to be evaulated. Even at 3 levels of depth, thousands of positions have to be evaluatd. Several methods are used in this program to reduce positions that are searched:
 
 
 
