@@ -1,18 +1,24 @@
 package com.chess.tests;
 
-import com.chess.engine.classic.Alliance;
-import com.chess.engine.classic.board.Board;
-import com.chess.engine.classic.board.Board.Builder;
-import com.chess.engine.classic.board.BoardUtils;
-import com.chess.engine.classic.board.Move;
-import com.chess.engine.classic.board.MoveTransition;
-import com.chess.engine.classic.pieces.*;
-import com.chess.engine.classic.player.ai.MiniMax;
-import com.chess.engine.classic.player.ai.MoveStrategy;
-import com.chess.pgn.FenUtilities;
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import main.java.com.chess.engine.classic.Alliance;
+import main.java.com.chess.engine.classic.board.Board;
+import main.java.com.chess.engine.classic.board.Board.Builder;
+import main.java.com.chess.engine.classic.board.BoardUtils;
+import main.java.com.chess.engine.classic.board.Move;
+import main.java.com.chess.engine.classic.board.MoveTransition;
+import main.java.com.chess.engine.classic.pieces.Bishop;
+import main.java.com.chess.engine.classic.pieces.King;
+import main.java.com.chess.engine.classic.pieces.Knight;
+import main.java.com.chess.engine.classic.pieces.Pawn;
+import main.java.com.chess.engine.classic.pieces.Queen;
+import main.java.com.chess.engine.classic.pieces.Rook;
+import main.java.com.chess.engine.classic.player.ai.MiniMax;
+import main.java.com.chess.engine.classic.player.ai.MoveStrategy;
+import main.java.com.chess.pgn.FenUtilities;
 
 public class TestMiniMax {
 

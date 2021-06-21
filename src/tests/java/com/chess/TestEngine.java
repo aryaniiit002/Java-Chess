@@ -1,12 +1,13 @@
 package com.chess.tests;
 
-import com.chess.engine.classic.board.Board;
-import com.chess.engine.classic.player.ai.MiniMax;
-import com.chess.engine.classic.player.ai.MoveStrategy;
-import com.chess.pgn.FenUtilities;
+import static junit.framework.TestCase.assertEquals;
+
 import org.junit.Test;
 
-import static junit.framework.TestCase.assertEquals;
+import main.java.com.chess.engine.classic.board.Board;
+import main.java.com.chess.engine.classic.player.ai.MiniMax;
+import main.java.com.chess.engine.classic.player.ai.MoveStrategy;
+import main.java.com.chess.pgn.FenUtilities;
 
 /**
  * Created by amir.afghani on 6/4/17.

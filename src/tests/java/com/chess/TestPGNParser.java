@@ -7,13 +7,13 @@ import java.util.List;
 
 import org.junit.Test;
 
-import com.chess.pgn.MySqlGamePersistence;
-import com.chess.pgn.PGNUtilities;
-import com.chess.pgn.ParsePGNException;
-import com.chess.engine.classic.board.Board;
-import com.chess.engine.classic.board.Move;
-import com.chess.engine.classic.board.MoveTransition;
 import com.google.common.io.Resources;
+import main.java.com.chess.engine.classic.board.Board;
+import main.java.com.chess.engine.classic.board.Move;
+import main.java.com.chess.engine.classic.board.MoveTransition;
+import main.java.com.chess.pgn.MySqlGamePersistence;
+import main.java.com.chess.pgn.PGNUtilities;
+import main.java.com.chess.pgn.ParsePGNException;
 
 public class TestPGNParser {
 

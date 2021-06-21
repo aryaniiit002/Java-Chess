@@ -1,21 +1,22 @@
 package com.chess.tests;
 
-import com.chess.engine.classic.Alliance;
-import com.chess.engine.classic.board.Board;
-import com.chess.engine.classic.board.Board.Builder;
-import com.chess.engine.classic.board.BoardUtils;
-import com.chess.engine.classic.board.Move;
-import com.chess.engine.classic.board.Move.MoveFactory;
-import com.chess.engine.classic.board.MoveTransition;
-import com.chess.engine.classic.pieces.Bishop;
-import com.chess.engine.classic.pieces.King;
-import com.chess.engine.classic.pieces.Rook;
-import com.chess.engine.classic.player.ai.StandardBoardEvaluator;
-import org.junit.Test;
-
+import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertTrue;
-import static org.junit.Assert.assertEquals;
+
+import org.junit.Test;
+
+import main.java.com.chess.engine.classic.Alliance;
+import main.java.com.chess.engine.classic.board.Board;
+import main.java.com.chess.engine.classic.board.Board.Builder;
+import main.java.com.chess.engine.classic.board.BoardUtils;
+import main.java.com.chess.engine.classic.board.Move;
+import main.java.com.chess.engine.classic.board.Move.MoveFactory;
+import main.java.com.chess.engine.classic.board.MoveTransition;
+import main.java.com.chess.engine.classic.pieces.Bishop;
+import main.java.com.chess.engine.classic.pieces.King;
+import main.java.com.chess.engine.classic.pieces.Rook;
+import main.java.com.chess.engine.classic.player.ai.StandardBoardEvaluator;
 
 public class TestPlayer {
 

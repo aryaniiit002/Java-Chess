@@ -1,22 +1,29 @@
 package com.chess.tests;
 
-import com.chess.engine.classic.Alliance;
-import com.chess.engine.classic.board.Board;
-import com.chess.engine.classic.board.BoardUtils;
-import com.chess.engine.classic.board.Move;
-import com.chess.engine.classic.board.MoveTransition;
-import com.chess.engine.classic.pieces.*;
-import com.google.common.collect.Sets;
-import org.junit.Assert;
-import org.junit.Test;
-
-import java.util.Collection;
-import java.util.Set;
-
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertTrue;
 import static junit.framework.TestCase.assertFalse;
 import static org.junit.Assert.assertNotNull;
+
+import java.util.Collection;
+import java.util.Set;
+
+import org.junit.Assert;
+import org.junit.Test;
+
+import com.google.common.collect.Sets;
+import main.java.com.chess.engine.classic.Alliance;
+import main.java.com.chess.engine.classic.board.Board;
+import main.java.com.chess.engine.classic.board.BoardUtils;
+import main.java.com.chess.engine.classic.board.Move;
+import main.java.com.chess.engine.classic.board.MoveTransition;
+import main.java.com.chess.engine.classic.pieces.Bishop;
+import main.java.com.chess.engine.classic.pieces.King;
+import main.java.com.chess.engine.classic.pieces.Knight;
+import main.java.com.chess.engine.classic.pieces.Pawn;
+import main.java.com.chess.engine.classic.pieces.Piece;
+import main.java.com.chess.engine.classic.pieces.Queen;
+import main.java.com.chess.engine.classic.pieces.Rook;
 
 public class TestPieces {
 

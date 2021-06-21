@@ -1,16 +1,18 @@
 package com.chess.tests;
 
-import com.chess.engine.classic.board.Board;
-import com.chess.engine.classic.board.BoardUtils;
-import com.chess.engine.classic.board.Move;
-import com.chess.engine.classic.board.MoveTransition;
-import com.chess.engine.classic.player.ai.MoveStrategy;
-import com.chess.engine.classic.player.ai.StockAlphaBeta;
-import com.chess.pgn.FenUtilities;
-import org.junit.Test;
-
 import static junit.framework.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
+
+import org.junit.Assert;
+import org.junit.Test;
+
+import main.java.com.chess.engine.classic.board.Board;
+import main.java.com.chess.engine.classic.board.BoardUtils;
+import main.java.com.chess.engine.classic.board.Move;
+import main.java.com.chess.engine.classic.board.MoveTransition;
+import main.java.com.chess.engine.classic.player.ai.MoveStrategy;
+import main.java.com.chess.engine.classic.player.ai.StockAlphaBeta;
+import main.java.com.chess.pgn.FenUtilities;
 
 public class TestCastling {
 
@@ -225,7 +227,7 @@ public class TestCastling {
                 .makeMove(
                         Move.MoveFactory.createMove(t10.getToBoard(), BoardUtils.INSTANCE.getCoordinateAtPosition("g1"),
                                 BoardUtils.INSTANCE.getCoordinateAtPosition("f3")));
-        assertTrue(t11.getMoveStatus().isDone());
+        Assert.assertTrue(t11.getMoveStatus().isDone());
         final Move wm1 = Move.MoveFactory
                 .createMove(t11.getToBoard(), BoardUtils.INSTANCE.getCoordinateAtPosition(
                         "e8"), BoardUtils.INSTANCE.getCoordinateAtPosition("c8"));

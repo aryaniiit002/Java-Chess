@@ -5,15 +5,16 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import com.chess.engine.classic.Alliance;
-import com.chess.engine.classic.board.Board;
-import com.chess.engine.classic.board.Board.Builder;
-import com.chess.engine.classic.board.BoardUtils;
-import com.chess.engine.classic.board.Move.MoveFactory;
-import com.chess.engine.classic.board.MoveTransition;
-import com.chess.engine.classic.pieces.Bishop;
-import com.chess.engine.classic.pieces.King;
-import com.chess.engine.classic.pieces.Pawn;
+import main.java.com.chess.engine.classic.Alliance;
+import main.java.com.chess.engine.classic.board.Board;
+import main.java.com.chess.engine.classic.board.Board.Builder;
+import main.java.com.chess.engine.classic.board.BoardUtils;
+import main.java.com.chess.engine.classic.board.Move;
+import main.java.com.chess.engine.classic.board.Move.MoveFactory;
+import main.java.com.chess.engine.classic.board.MoveTransition;
+import main.java.com.chess.engine.classic.pieces.Bishop;
+import main.java.com.chess.engine.classic.pieces.King;
+import main.java.com.chess.engine.classic.pieces.Pawn;
 
 public class TestStaleMate {
     @Test

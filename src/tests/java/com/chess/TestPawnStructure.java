@@ -1,16 +1,17 @@
 package com.chess.tests;
 
-import com.chess.engine.classic.Alliance;
-import com.chess.engine.classic.board.Board;
-import com.chess.engine.classic.board.Board.Builder;
-import com.chess.engine.classic.pieces.King;
-import com.chess.engine.classic.pieces.Pawn;
-import com.chess.engine.classic.player.ai.PawnStructureAnalyzer;
-import com.chess.engine.classic.player.ai.StandardBoardEvaluator;
-import com.chess.pgn.FenUtilities;
+import static junit.framework.Assert.assertEquals;
+
 import org.junit.Test;
 
-import static junit.framework.Assert.assertEquals;
+import main.java.com.chess.engine.classic.Alliance;
+import main.java.com.chess.engine.classic.board.Board;
+import main.java.com.chess.engine.classic.board.Board.Builder;
+import main.java.com.chess.engine.classic.pieces.King;
+import main.java.com.chess.engine.classic.pieces.Pawn;
+import main.java.com.chess.engine.classic.player.ai.PawnStructureAnalyzer;
+import main.java.com.chess.engine.classic.player.ai.StandardBoardEvaluator;
+import main.java.com.chess.pgn.FenUtilities;
 
 public class TestPawnStructure {
 

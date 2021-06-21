@@ -1,16 +1,17 @@
 package com.chess.tests;
 
-import com.chess.pgn.FenUtilities;
-import com.chess.engine.classic.board.Board;
-import com.chess.engine.classic.board.BoardUtils;
-import com.chess.engine.classic.board.Move;
-import com.chess.engine.classic.board.MoveTransition;
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import org.junit.Test;
+
+import main.java.com.chess.engine.classic.board.Board;
+import main.java.com.chess.engine.classic.board.BoardUtils;
+import main.java.com.chess.engine.classic.board.Move;
+import main.java.com.chess.engine.classic.board.MoveTransition;
+import main.java.com.chess.pgn.FenUtilities;
 
 
 public class TestFENParser {

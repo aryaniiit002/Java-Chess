@@ -2,11 +2,11 @@ package com.chess.tests;
 
 import org.junit.Test;
 
-import com.chess.engine.classic.Alliance;
-import com.chess.engine.classic.board.Board;
-import com.chess.engine.classic.board.Board.Builder;
-import com.chess.engine.classic.pieces.King;
-import com.chess.engine.classic.pieces.Pawn;
+import main.java.com.chess.engine.classic.Alliance;
+import main.java.com.chess.engine.classic.board.Board;
+import main.java.com.chess.engine.classic.board.Board.Builder;
+import main.java.com.chess.engine.classic.pieces.King;
+import main.java.com.chess.engine.classic.pieces.Pawn;
 
 public class TestKingSafety {
 
