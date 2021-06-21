@@ -10,20 +10,17 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-import javax.swing.JPanel;
+import com.chess.engine.classic.board.Board;
+import com.chess.engine.classic.board.Move;
+import com.chess.gui.Table.MoveLog;
 
-import com.chess.engine.board.Board;
-import com.chess.engine.board.Move;
-import com.sun.rowset.internal.Row;
-
-public class GameHistoryPanel extends JPanel {
+class GameHistoryPanel extends JPanel {
 
     private final DataModel model;
     private final JScrollPane scrollPane;
     private static final Dimension HISTORY_PANEL_DIMENSION = new Dimension(100, 40);
 
     GameHistoryPanel() {
-
         this.setLayout(new BorderLayout());
         this.model = new DataModel();
         final JTable table = new JTable(model);
@@ -36,14 +33,11 @@ public class GameHistoryPanel extends JPanel {
     }
 
     void redo(final Board board,
-              final Table.MoveLog moveHistory) {
-
+              final MoveLog moveHistory) {
         int currentRow = 0;
         this.model.clear();
-
         for (final Move move : moveHistory.getMoves()) {
             final String moveText = move.toString();
-
             if (move.getMovedPiece().getPieceAllegiance().isWhite()) {
                 this.model.setValueAt(moveText, currentRow, 0);
             }
@@ -53,8 +47,7 @@ public class GameHistoryPanel extends JPanel {
             }
         }
 
-        if(!moveHistory.getMoves().isEmpty()) {
-
+        if(moveHistory.getMoves().size() > 0) {
             final Move lastMove = moveHistory.getMoves().get(moveHistory.size() - 1);
             final String moveText = lastMove.toString();
 
@@ -68,6 +61,7 @@ public class GameHistoryPanel extends JPanel {
 
         final JScrollBar vertical = scrollPane.getVerticalScrollBar();
         vertical.setValue(vertical.getMaximum());
+
     }
 
     private static String calculateCheckAndCheckMateHash(final Board board) {
@@ -102,11 +96,12 @@ public class GameHistoryPanel extends JPanel {
         public void setBlackMove(final String move) {
             this.blackMove = move;
         }
+
     }
 
     private static class DataModel extends DefaultTableModel {
 
-        private final List<GameHistoryPanel.Row> values;
+        private final List<Row> values;
         private static final String[] NAMES = {"White", "Black"};
 
         DataModel() {
@@ -133,11 +128,10 @@ public class GameHistoryPanel extends JPanel {
 
         @Override
         public Object getValueAt(final int row, final int col) {
-            final GameHistoryPanel.Row currentRow = this.values.get(row);
+            final Row currentRow = this.values.get(row);
             if(col == 0) {
                 return currentRow.getWhiteMove();
-            }
-            if (col == 1) {
+            } else if (col == 1) {
                 return currentRow.getBlackMove();
             }
             return null;
@@ -147,9 +141,9 @@ public class GameHistoryPanel extends JPanel {
         public void setValueAt(final Object aValue,
                                final int row,
                                final int col) {
-            final GameHistoryPanel.Row currentRow;
+            final Row currentRow;
             if(this.values.size() <= row) {
-                currentRow = new GameHistoryPanel.Row();
+                currentRow = new Row();
                 this.values.add(currentRow);
             } else {
                 currentRow = this.values.get(row);
