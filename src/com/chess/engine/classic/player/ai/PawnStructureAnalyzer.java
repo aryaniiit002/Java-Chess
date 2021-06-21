@@ -1,4 +1,4 @@
-package com.chess.engine.player.ai;
+package com.chess.engine.classic.player.ai;
 
 import com.chess.engine.classic.pieces.Piece;
 import com.chess.engine.classic.player.Player;

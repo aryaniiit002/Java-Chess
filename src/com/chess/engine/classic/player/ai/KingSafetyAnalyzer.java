@@ -1,10 +1,9 @@
-package com.chess.engine.player.ai;
+package com.chess.engine.classic.player.ai;
 
-import com.chess.engine.board.BoardUtils;
-import com.chess.engine.board.BoardUtils;
-import com.chess.engine.board.Move;
-import com.chess.engine.pieces.Piece;
-import com.chess.engine.player.Player;
+import com.chess.engine.classic.board.BoardUtils;
+import com.chess.engine.classic.board.Move;
+import com.chess.engine.classic.pieces.Piece;
+import com.chess.engine.classic.player.Player;
 import com.google.common.collect.ImmutableList;
 
 import java.util.ArrayList;

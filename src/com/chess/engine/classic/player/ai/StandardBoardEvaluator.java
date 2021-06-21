@@ -1,19 +1,23 @@
-package com.chess.engine.player.ai;
+package com.chess.engine.classic.player.ai;
 
-import com.chess.engine.board.Board;
-import com.chess.engine.board.Move;
-import com.chess.engine.pieces.Piece;
-import com.chess.engine.player.Player;
+import com.chess.engine.classic.board.Board;
+import com.chess.engine.classic.board.Move;
+import com.chess.engine.classic.pieces.Piece;
+import com.chess.engine.classic.player.Player;
+import com.chess.engine.classic.player.ai.KingSafetyAnalyzer.KingDistance;
 import com.google.common.annotations.VisibleForTesting;
 
-public final class StandardBoardEvaluator implements BoardEvaluator {
+import static com.chess.engine.classic.pieces.Piece.PieceType.BISHOP;
 
-    private static final int CHECK_MATE_BONUS = 10000;
-    private static final int CHECK_BONUS = 45;
-    private static final int CASTLE_BONUS = 25;
-    private static final int MOBILITY_MULTIPLIER = 5;
-    private static final int ATTACK_MULTIPLIER = 1;
-    private static final int TWO_BISHOPS_BONUS = 25;
+public final class StandardBoardEvaluator
+        implements BoardEvaluator {
+
+    private final static int CHECK_MATE_BONUS = 10000;
+    private final static int CHECK_BONUS = 45;
+    private final static int CASTLE_BONUS = 25;
+    private final static int MOBILITY_MULTIPLIER = 5;
+    private final static int ATTACK_MULTIPLIER = 1;
+    private final static int TWO_BISHOPS_BONUS = 25;
     private static final StandardBoardEvaluator INSTANCE = new StandardBoardEvaluator();
 
     private StandardBoardEvaluator() {
@@ -31,7 +35,7 @@ public final class StandardBoardEvaluator implements BoardEvaluator {
 
     public String evaluationDetails(final Board board, final int depth) {
         return
-            "White Mobility : " + mobility(board.whitePlayer()) + "\n" +
+               ("White Mobility : " + mobility(board.whitePlayer()) + "\n") +
                 "White kingThreats : " + kingThreats(board.whitePlayer(), depth) + "\n" +
                 "White attacks : " + attacks(board.whitePlayer()) + "\n" +
                 "White castle : " + castle(board.whitePlayer()) + "\n" +
@@ -114,7 +118,7 @@ public final class StandardBoardEvaluator implements BoardEvaluator {
     }
 
     private static int kingSafety(final Player player) {
-        final KingSafetyAnalyzer.KingDistance kingDistance = KingSafetyAnalyzer.get().calculateKingTropism(player);
+        final KingDistance kingDistance = KingSafetyAnalyzer.get().calculateKingTropism(player);
         return ((kingDistance.getEnemyPiece().getPieceValue() / 100) * kingDistance.getDistance());
     }
 
