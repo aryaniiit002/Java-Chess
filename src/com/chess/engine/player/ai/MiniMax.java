@@ -27,9 +27,45 @@ public class MiniMax implements MoveStrategy {
      */
     @Override
     public Move execute(Board board, int depth) {
-        return null;
+
+        final long startTime = System.currentTimeMillis();
+        Move bestMove = Move.MoveFactory.getNullMove();
+        int highestSeenValue = Integer.MIN_VALUE;
+        int lowestSeenValue = Integer.MAX_VALUE;
+        int currentValue;
+
+        System.out.println(board.currentPlayer() + " THINKING with depth = " + depth);
+
+        final int numMoves = board.currentPlayer().getLegalMoves().size();
+
+        for (final Move move : board.currentPlayer().getLegalMoves()) {
+            final MoveTransition moveTransition = board.currentPlayer().makeMove(move);
+
+            if (moveTransition.getMoveStatus().isDone()) {
+                currentValue = board.currentPlayer().getAlliance().isWhite() ?
+                    min(moveTransition.getTransitionBoard(), depth - 1) :
+                    max(moveTransition.getTransitionBoard(), depth - 1);
+
+                if (board.currentPlayer().getAlliance().isWhite() &&
+                    currentValue >= highestSeenValue) {
+                    highestSeenValue = currentValue;
+                    bestMove = move;
+                } else if (board.currentPlayer().getAlliance().isBlack() &&
+                    currentValue <= lowestSeenValue) {
+                    lowestSeenValue = currentValue;
+                    bestMove = move;
+                }
+            }
+
+            final long executionTime = System.currentTimeMillis() - startTime;
+
+            return bestMove;
+        }
     }
 
+    /** min calls max and max calls min.
+     * These methods are CO recursive.
+     */
     private int min(final Board board,
                     final int depth) {
         if(depth == 0) {
