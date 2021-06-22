@@ -1,30 +1,61 @@
 package main.java.com.chess.gui;
 
-import main.java.com.chess.engine.classic.board.*;
+import static javax.swing.JFrame.setDefaultLookAndFeelDecorated;
+import static javax.swing.SwingUtilities.invokeLater;
+import static javax.swing.SwingUtilities.isLeftMouseButton;
+import static javax.swing.SwingUtilities.isRightMouseButton;
+import static main.java.com.chess.pgn.PGNUtilities.persistPGNFile;
+import static main.java.com.chess.pgn.PGNUtilities.writeGameToPGNFile;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
+import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
+
+import javax.imageio.ImageIO;
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JCheckBoxMenuItem;
+import javax.swing.JColorChooser;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.SwingWorker;
+import javax.swing.WindowConstants;
+import javax.swing.filechooser.FileFilter;
+
+import com.google.common.collect.Lists;
+import main.java.com.chess.engine.classic.board.Board;
+import main.java.com.chess.engine.classic.board.BoardUtils;
+import main.java.com.chess.engine.classic.board.Move;
 import main.java.com.chess.engine.classic.board.Move.MoveFactory;
+import main.java.com.chess.engine.classic.board.MoveTransition;
+import main.java.com.chess.engine.classic.board.MoveUtils;
 import main.java.com.chess.engine.classic.pieces.Piece;
 import main.java.com.chess.engine.classic.player.Player;
 import main.java.com.chess.engine.classic.player.ai.StandardBoardEvaluator;
 import main.java.com.chess.engine.classic.player.ai.StockAlphaBeta;
 import main.java.com.chess.pgn.FenUtilities;
 import main.java.com.chess.pgn.MySqlGamePersistence;
-import com.google.common.collect.Lists;
-
-import javax.imageio.ImageIO;
-import javax.swing.*;
-import javax.swing.filechooser.FileFilter;
-import java.awt.*;
-import java.awt.event.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.util.*;
-import java.util.List;
-
-import static main.java.com.chess.pgn.PGNUtilities.persistPGNFile;
-import static main.java.com.chess.pgn.PGNUtilities.writeGameToPGNFile;
-import static javax.swing.JFrame.setDefaultLookAndFeelDecorated;
-import static javax.swing.SwingUtilities.*;
 
 public final class Table extends Observable {
 
@@ -53,7 +84,7 @@ public final class Table extends Observable {
     private static final Table INSTANCE = new Table();
 
     private Table() {
-        this.gameFrame = new JFrame("BlackWidow");
+        this.gameFrame = new JFrame("JChess");
         final JMenuBar tableMenuBar = new JMenuBar();
         populateMenuBar(tableMenuBar);
         this.gameFrame.setJMenuBar(tableMenuBar);
