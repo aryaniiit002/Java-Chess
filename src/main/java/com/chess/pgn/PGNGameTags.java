@@ -1,4 +1,4 @@
-package main.java.com.chess.pgn;
+package com.chess.pgn;
 
 import java.util.HashMap;
 import java.util.Map;

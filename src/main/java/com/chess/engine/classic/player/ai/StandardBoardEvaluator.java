@@ -1,13 +1,13 @@
-package main.java.com.chess.engine.classic.player.ai;
+package com.chess.engine.classic.player.ai;
 
-import main.java.com.chess.engine.classic.board.Board;
-import main.java.com.chess.engine.classic.board.Move;
-import main.java.com.chess.engine.classic.pieces.Piece;
-import main.java.com.chess.engine.classic.player.Player;
-import main.java.com.chess.engine.classic.player.ai.KingSafetyAnalyzer.KingDistance;
+import static com.chess.engine.classic.pieces.Piece.PieceType.BISHOP;
+
+import com.chess.engine.classic.board.Board;
+import com.chess.engine.classic.board.Move;
+import com.chess.engine.classic.pieces.Piece;
+import com.chess.engine.classic.player.Player;
+import com.chess.engine.classic.player.ai.KingSafetyAnalyzer.KingDistance;
 import com.google.common.annotations.VisibleForTesting;
-
-import static main.java.com.chess.engine.classic.pieces.Piece.PieceType.BISHOP;
 
 public final class StandardBoardEvaluator
         implements BoardEvaluator {

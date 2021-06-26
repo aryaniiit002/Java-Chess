@@ -1,6 +1,6 @@
-package main.java.com.chess.engine.classic.player.ai;
+package com.chess.engine.classic.player.ai;
 
-import main.java.com.chess.engine.classic.board.Board;
+import com.chess.engine.classic.board.Board;
 
 public interface BoardEvaluator {
 

@@ -1,16 +1,21 @@
-package main.java.com.chess.engine.classic.player.ai;
+package com.chess.engine.classic.player.ai;
 
-import main.java.com.chess.engine.classic.board.Board;
-import main.java.com.chess.engine.classic.board.BoardUtils;
-import main.java.com.chess.engine.classic.board.Move;
-import main.java.com.chess.engine.classic.board.MoveTransition;
+import static com.chess.engine.classic.board.Move.MoveFactory;
+import static com.google.common.collect.Ordering.from;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Observable;
+
+import com.chess.engine.classic.board.Board;
+import com.chess.engine.classic.board.BoardUtils;
+import com.chess.engine.classic.board.Move;
+import com.chess.engine.classic.board.MoveTransition;
 import com.google.common.collect.ComparisonChain;
 import com.google.common.primitives.Ints;
-
-import java.util.*;
-
-import static main.java.com.chess.engine.classic.board.Move.*;
-import static com.google.common.collect.Ordering.from;
 
 public class IterativeDeepening extends Observable implements MoveStrategy {
 

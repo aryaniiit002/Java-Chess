@@ -1,9 +1,9 @@
-package main.java.com.chess.engine.classic.board;
+package com.chess.engine.classic.board;
 
-import main.java.com.chess.engine.classic.board.Board.Builder;
-import main.java.com.chess.engine.classic.pieces.Pawn;
-import main.java.com.chess.engine.classic.pieces.Piece;
-import main.java.com.chess.engine.classic.pieces.Rook;
+import com.chess.engine.classic.board.Board.Builder;
+import com.chess.engine.classic.pieces.Pawn;
+import com.chess.engine.classic.pieces.Piece;
+import com.chess.engine.classic.pieces.Rook;
 
 public abstract class Move {
 

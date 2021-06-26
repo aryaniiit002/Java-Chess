@@ -1,6 +1,6 @@
-package main.java.com.chess.engine.classic.board;
+package com.chess.engine.classic.board;
 
-import static main.java.com.chess.engine.classic.board.Move.*;
+import static com.chess.engine.classic.board.Move.*;
 
 public enum MoveUtils {
 

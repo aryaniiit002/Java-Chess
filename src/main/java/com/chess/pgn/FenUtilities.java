@@ -1,12 +1,16 @@
-package main.java.com.chess.pgn;
+package com.chess.pgn;
 
+import static com.chess.engine.classic.board.Board.Builder;
 
-import main.java.com.chess.engine.classic.Alliance;
-import main.java.com.chess.engine.classic.board.Board;
-import main.java.com.chess.engine.classic.board.BoardUtils;
-import main.java.com.chess.engine.classic.pieces.*;
-
-import static main.java.com.chess.engine.classic.board.Board.Builder;
+import com.chess.engine.classic.Alliance;
+import com.chess.engine.classic.board.Board;
+import com.chess.engine.classic.board.BoardUtils;
+import com.chess.engine.classic.pieces.Bishop;
+import com.chess.engine.classic.pieces.King;
+import com.chess.engine.classic.pieces.Knight;
+import com.chess.engine.classic.pieces.Pawn;
+import com.chess.engine.classic.pieces.Queen;
+import com.chess.engine.classic.pieces.Rook;
 
 public class FenUtilities {
 

@@ -1,20 +1,20 @@
-package main.java.com.chess.engine.classic.player;
+package com.chess.engine.classic.player;
 
-import main.java.com.chess.engine.classic.Alliance;
-import main.java.com.chess.engine.classic.board.Board;
-import main.java.com.chess.engine.classic.board.BoardUtils;
-import main.java.com.chess.engine.classic.board.Move;
-import main.java.com.chess.engine.classic.board.Move.KingSideCastleMove;
-import main.java.com.chess.engine.classic.board.Move.QueenSideCastleMove;
-import main.java.com.chess.engine.classic.pieces.Piece;
-import main.java.com.chess.engine.classic.pieces.Rook;
+import static com.chess.engine.classic.pieces.Piece.PieceType.ROOK;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-import static main.java.com.chess.engine.classic.pieces.Piece.PieceType.ROOK;
+import com.chess.engine.classic.Alliance;
+import com.chess.engine.classic.board.Board;
+import com.chess.engine.classic.board.BoardUtils;
+import com.chess.engine.classic.board.Move;
+import com.chess.engine.classic.board.Move.KingSideCastleMove;
+import com.chess.engine.classic.board.Move.QueenSideCastleMove;
+import com.chess.engine.classic.pieces.Piece;
+import com.chess.engine.classic.pieces.Rook;
 
 public final class BlackPlayer extends Player {
 

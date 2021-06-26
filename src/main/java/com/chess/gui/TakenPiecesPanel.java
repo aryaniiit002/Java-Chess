@@ -1,4 +1,4 @@
-package main.java.com.chess.gui;
+package com.chess.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -18,9 +18,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EtchedBorder;
 
-import main.java.com.chess.engine.classic.board.Move;
-import main.java.com.chess.engine.classic.pieces.Piece;
-import main.java.com.chess.gui.Table.MoveLog;
+import com.chess.engine.classic.board.Move;
+import com.chess.engine.classic.pieces.Piece;
+import com.chess.gui.Table.MoveLog;
 import com.google.common.primitives.Ints;
 
 class TakenPiecesPanel extends JPanel {

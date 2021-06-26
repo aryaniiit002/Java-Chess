@@ -1,4 +1,4 @@
-package main.java.com.chess.gui;
+package com.chess.gui;
 
 import java.awt.Container;
 import java.awt.GridLayout;
@@ -16,9 +16,9 @@ import javax.swing.JSpinner;
 import javax.swing.SpinnerModel;
 import javax.swing.SpinnerNumberModel;
 
-import main.java.com.chess.engine.classic.Alliance;
-import main.java.com.chess.engine.classic.player.Player;
-import main.java.com.chess.gui.Table.PlayerType;
+import com.chess.engine.classic.Alliance;
+import com.chess.engine.classic.player.Player;
+import com.chess.gui.Table.PlayerType;
 
 class GameSetup extends JDialog {
 

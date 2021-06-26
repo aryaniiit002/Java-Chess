@@ -1,4 +1,4 @@
-package main.java.com.chess.engine.classic.board;
+package com.chess.engine.classic.board;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -7,18 +7,18 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import main.java.com.chess.engine.classic.Alliance;
-import main.java.com.chess.engine.classic.board.Move.MoveFactory;
-import main.java.com.chess.engine.classic.pieces.Bishop;
-import main.java.com.chess.engine.classic.pieces.King;
-import main.java.com.chess.engine.classic.pieces.Knight;
-import main.java.com.chess.engine.classic.pieces.Pawn;
-import main.java.com.chess.engine.classic.pieces.Piece;
-import main.java.com.chess.engine.classic.pieces.Queen;
-import main.java.com.chess.engine.classic.pieces.Rook;
-import main.java.com.chess.engine.classic.player.BlackPlayer;
-import main.java.com.chess.engine.classic.player.Player;
-import main.java.com.chess.engine.classic.player.WhitePlayer;
+import com.chess.engine.classic.Alliance;
+import com.chess.engine.classic.board.Move.MoveFactory;
+import com.chess.engine.classic.pieces.Bishop;
+import com.chess.engine.classic.pieces.King;
+import com.chess.engine.classic.pieces.Knight;
+import com.chess.engine.classic.pieces.Pawn;
+import com.chess.engine.classic.pieces.Piece;
+import com.chess.engine.classic.pieces.Queen;
+import com.chess.engine.classic.pieces.Rook;
+import com.chess.engine.classic.player.BlackPlayer;
+import com.chess.engine.classic.player.Player;
+import com.chess.engine.classic.player.WhitePlayer;
 
 public final class Board {
 

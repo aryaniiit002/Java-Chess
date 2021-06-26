@@ -1,19 +1,19 @@
-package main.java.com.chess.engine.classic.player.ai;
+package com.chess.engine.classic.player.ai;
 
-import main.java.com.chess.engine.classic.board.Board;
-import main.java.com.chess.engine.classic.board.BoardUtils;
-import main.java.com.chess.engine.classic.board.Move;
-import main.java.com.chess.engine.classic.board.MoveTransition;
-import main.java.com.chess.engine.classic.player.Player;
-import com.google.common.collect.ComparisonChain;
-import com.google.common.collect.Ordering;
+import static com.chess.engine.classic.board.BoardUtils.mvvlva;
+import static com.chess.engine.classic.board.Move.MoveFactory;
 
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.Observable;
 
-import static main.java.com.chess.engine.classic.board.BoardUtils.mvvlva;
-import static main.java.com.chess.engine.classic.board.Move.MoveFactory;
+import com.chess.engine.classic.board.Board;
+import com.chess.engine.classic.board.BoardUtils;
+import com.chess.engine.classic.board.Move;
+import com.chess.engine.classic.board.MoveTransition;
+import com.chess.engine.classic.player.Player;
+import com.google.common.collect.ComparisonChain;
+import com.google.common.collect.Ordering;
 
 public class StockAlphaBeta extends Observable implements MoveStrategy {
 

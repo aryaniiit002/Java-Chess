@@ -1,4 +1,4 @@
-package main.java.com.chess.pgn;
+package com.chess.pgn;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -7,9 +7,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import main.java.com.chess.engine.classic.board.Board;
-import main.java.com.chess.engine.classic.board.Move;
-import main.java.com.chess.engine.classic.player.Player;
+import com.chess.engine.classic.board.Board;
+import com.chess.engine.classic.board.Move;
+import com.chess.engine.classic.player.Player;
 
 public class MySqlGamePersistence implements PGNPersistence {
 

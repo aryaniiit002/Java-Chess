@@ -1,14 +1,14 @@
-package main.java.com.chess.engine.classic.player.ai;
-
-import main.java.com.chess.engine.classic.board.BoardUtils;
-import main.java.com.chess.engine.classic.board.Move;
-import main.java.com.chess.engine.classic.pieces.Piece;
-import main.java.com.chess.engine.classic.player.Player;
-import com.google.common.collect.ImmutableList;
+package com.chess.engine.classic.player.ai;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+
+import com.chess.engine.classic.board.BoardUtils;
+import com.chess.engine.classic.board.Move;
+import com.chess.engine.classic.pieces.Piece;
+import com.chess.engine.classic.player.Player;
+import com.google.common.collect.ImmutableList;
 
 public final class KingSafetyAnalyzer {
 

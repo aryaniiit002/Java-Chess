@@ -1,11 +1,11 @@
-package main.java.com.chess.engine.classic.board;
+package com.chess.engine.classic.board;
 
-import main.java.com.chess.engine.classic.pieces.King;
-import main.java.com.chess.engine.classic.pieces.Piece;
+import com.chess.engine.classic.pieces.King;
+import com.chess.engine.classic.pieces.Piece;
 
 import java.util.*;
 
-import static main.java.com.chess.engine.classic.board.Move.MoveFactory;
+import static com.chess.engine.classic.board.Move.MoveFactory;
 
 public enum  BoardUtils {
 

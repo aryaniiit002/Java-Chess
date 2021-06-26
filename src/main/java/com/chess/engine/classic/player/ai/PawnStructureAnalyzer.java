@@ -1,10 +1,10 @@
-package main.java.com.chess.engine.classic.player.ai;
-
-import main.java.com.chess.engine.classic.pieces.Piece;
-import main.java.com.chess.engine.classic.player.Player;
+package com.chess.engine.classic.player.ai;
 
 import java.util.Collection;
 import java.util.stream.Collectors;
+
+import com.chess.engine.classic.pieces.Piece;
+import com.chess.engine.classic.player.Player;
 
 public final class PawnStructureAnalyzer {
 

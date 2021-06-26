@@ -1,4 +1,4 @@
-package main.java.com.chess.pgn;
+package com.chess.pgn;
 
 public interface Playable {
 

@@ -1,7 +1,7 @@
-package main.java.com.chess.engine.classic.pieces;
+package com.chess.engine.classic.pieces;
 
-import main.java.com.chess.engine.classic.Alliance;
-import main.java.com.chess.engine.classic.board.BoardUtils;
+import com.chess.engine.classic.Alliance;
+import com.chess.engine.classic.board.BoardUtils;
 import com.google.common.collect.ImmutableTable;
 import com.google.common.collect.Table;
 

@@ -1,6 +1,6 @@
-package main.java.com.chess.engine.classic.board;
+package com.chess.engine.classic.board;
 
-import main.java.com.chess.engine.classic.board.Move.MoveStatus;
+import com.chess.engine.classic.board.Move.MoveStatus;
 
 public final class MoveTransition {
 

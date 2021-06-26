@@ -1,4 +1,4 @@
-package main.java.com.chess.gui;
+package com.chess.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -10,9 +10,9 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-import main.java.com.chess.engine.classic.board.Board;
-import main.java.com.chess.engine.classic.board.Move;
-import main.java.com.chess.gui.Table.MoveLog;
+import com.chess.engine.classic.board.Board;
+import com.chess.engine.classic.board.Move;
+import com.chess.gui.Table.MoveLog;
 
 class GameHistoryPanel extends JPanel {
 

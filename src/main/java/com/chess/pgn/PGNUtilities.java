@@ -1,9 +1,9 @@
-package main.java.com.chess.pgn;
+package com.chess.pgn;
 
-import main.java.com.chess.engine.classic.board.Board;
-import main.java.com.chess.engine.classic.board.BoardUtils;
-import main.java.com.chess.engine.classic.board.Move;
-import main.java.com.chess.gui.Table.MoveLog;
+import com.chess.engine.classic.board.Board;
+import com.chess.engine.classic.board.BoardUtils;
+import com.chess.engine.classic.board.Move;
+import com.chess.gui.Table.MoveLog;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableList.Builder;
 
@@ -13,7 +13,7 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static main.java.com.chess.engine.classic.board.Move.MoveFactory;
+import static com.chess.engine.classic.board.Move.MoveFactory;
 
 public class PGNUtilities {
 

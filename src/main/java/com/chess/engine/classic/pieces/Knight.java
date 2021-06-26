@@ -1,11 +1,11 @@
-package main.java.com.chess.engine.classic.pieces;
+package com.chess.engine.classic.pieces;
 
-import main.java.com.chess.engine.classic.Alliance;
-import main.java.com.chess.engine.classic.board.Board;
-import main.java.com.chess.engine.classic.board.BoardUtils;
-import main.java.com.chess.engine.classic.board.Move;
-import main.java.com.chess.engine.classic.board.Move.MajorAttackMove;
-import main.java.com.chess.engine.classic.board.Move.MajorMove;
+import com.chess.engine.classic.Alliance;
+import com.chess.engine.classic.board.Board;
+import com.chess.engine.classic.board.BoardUtils;
+import com.chess.engine.classic.board.Move;
+import com.chess.engine.classic.board.Move.MajorAttackMove;
+import com.chess.engine.classic.board.Move.MajorMove;
 
 import java.util.ArrayList;
 import java.util.Collection;

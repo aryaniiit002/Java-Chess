@@ -1,19 +1,19 @@
-package main.java.com.chess.engine.classic.player;
+package com.chess.engine.classic.player;
 
-import main.java.com.chess.engine.classic.Alliance;
-import main.java.com.chess.engine.classic.board.Board;
-import main.java.com.chess.engine.classic.board.Move;
-import main.java.com.chess.engine.classic.board.Move.MoveStatus;
-import main.java.com.chess.engine.classic.board.MoveTransition;
-import main.java.com.chess.engine.classic.pieces.King;
-import main.java.com.chess.engine.classic.pieces.Piece;
+import static com.chess.engine.classic.pieces.Piece.PieceType.KING;
+import static java.util.stream.Collectors.collectingAndThen;
 
 import java.util.Collection;
 import java.util.Collections;
 import java.util.stream.Collectors;
 
-import static main.java.com.chess.engine.classic.pieces.Piece.PieceType.KING;
-import static java.util.stream.Collectors.collectingAndThen;
+import com.chess.engine.classic.Alliance;
+import com.chess.engine.classic.board.Board;
+import com.chess.engine.classic.board.Move;
+import com.chess.engine.classic.board.Move.MoveStatus;
+import com.chess.engine.classic.board.MoveTransition;
+import com.chess.engine.classic.pieces.King;
+import com.chess.engine.classic.pieces.Piece;
 
 public abstract class Player {
 

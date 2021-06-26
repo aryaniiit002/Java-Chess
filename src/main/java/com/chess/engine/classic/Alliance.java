@@ -1,9 +1,9 @@
-package main.java.com.chess.engine.classic;
+package com.chess.engine.classic;
 
-import main.java.com.chess.engine.classic.board.BoardUtils;
-import main.java.com.chess.engine.classic.player.BlackPlayer;
-import main.java.com.chess.engine.classic.player.Player;
-import main.java.com.chess.engine.classic.player.WhitePlayer;
+import com.chess.engine.classic.board.BoardUtils;
+import com.chess.engine.classic.player.BlackPlayer;
+import com.chess.engine.classic.player.Player;
+import com.chess.engine.classic.player.WhitePlayer;
 
 public enum Alliance {
 

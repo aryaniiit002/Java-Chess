@@ -1,13 +1,13 @@
-package main.java.com.chess.engine.classic.player.ai;
+package com.chess.engine.classic.player.ai;
 
-import main.java.com.chess.engine.classic.board.Board;
-import main.java.com.chess.engine.classic.board.BoardUtils;
-import main.java.com.chess.engine.classic.board.Move;
-import main.java.com.chess.engine.classic.board.MoveTransition;
+import com.chess.engine.classic.board.Board;
+import com.chess.engine.classic.board.BoardUtils;
+import com.chess.engine.classic.board.Move;
+import com.chess.engine.classic.board.MoveTransition;
 
 import java.util.concurrent.atomic.AtomicLong;
 
-import static main.java.com.chess.engine.classic.board.Move.*;
+import static com.chess.engine.classic.board.Move.*;
 
 public final class MiniMax implements MoveStrategy {
 

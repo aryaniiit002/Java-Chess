@@ -1,8 +1,8 @@
-package main.java.com.chess.pgn;
+package com.chess.pgn;
 
-import main.java.com.chess.engine.classic.board.Board;
-import main.java.com.chess.engine.classic.board.Move;
-import main.java.com.chess.engine.classic.player.Player;
+import com.chess.engine.classic.board.Board;
+import com.chess.engine.classic.board.Move;
+import com.chess.engine.classic.player.Player;
 
 public interface PGNPersistence {
 

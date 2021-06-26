@@ -1,4 +1,4 @@
-package main.java.com.chess.gui;
+package com.chess.gui;
 
 
 import java.awt.BorderLayout;

@@ -1,11 +1,11 @@
-package main.java.com.chess.gui;
+package com.chess.gui;
 
 import static javax.swing.JFrame.setDefaultLookAndFeelDecorated;
 import static javax.swing.SwingUtilities.invokeLater;
 import static javax.swing.SwingUtilities.isLeftMouseButton;
 import static javax.swing.SwingUtilities.isRightMouseButton;
-import static main.java.com.chess.pgn.PGNUtilities.persistPGNFile;
-import static main.java.com.chess.pgn.PGNUtilities.writeGameToPGNFile;
+import static com.chess.pgn.PGNUtilities.persistPGNFile;
+import static com.chess.pgn.PGNUtilities.writeGameToPGNFile;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -44,18 +44,18 @@ import javax.swing.WindowConstants;
 import javax.swing.filechooser.FileFilter;
 
 import com.google.common.collect.Lists;
-import main.java.com.chess.engine.classic.board.Board;
-import main.java.com.chess.engine.classic.board.BoardUtils;
-import main.java.com.chess.engine.classic.board.Move;
-import main.java.com.chess.engine.classic.board.Move.MoveFactory;
-import main.java.com.chess.engine.classic.board.MoveTransition;
-import main.java.com.chess.engine.classic.board.MoveUtils;
-import main.java.com.chess.engine.classic.pieces.Piece;
-import main.java.com.chess.engine.classic.player.Player;
-import main.java.com.chess.engine.classic.player.ai.StandardBoardEvaluator;
-import main.java.com.chess.engine.classic.player.ai.StockAlphaBeta;
-import main.java.com.chess.pgn.FenUtilities;
-import main.java.com.chess.pgn.MySqlGamePersistence;
+import com.chess.engine.classic.board.Board;
+import com.chess.engine.classic.board.BoardUtils;
+import com.chess.engine.classic.board.Move;
+import com.chess.engine.classic.board.Move.MoveFactory;
+import com.chess.engine.classic.board.MoveTransition;
+import com.chess.engine.classic.board.MoveUtils;
+import com.chess.engine.classic.pieces.Piece;
+import com.chess.engine.classic.player.Player;
+import com.chess.engine.classic.player.ai.StandardBoardEvaluator;
+import com.chess.engine.classic.player.ai.StockAlphaBeta;
+import com.chess.pgn.FenUtilities;
+import com.chess.pgn.MySqlGamePersistence;
 
 public final class Table extends Observable {
 
