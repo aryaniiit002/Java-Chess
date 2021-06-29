@@ -127,7 +127,7 @@ public final class KingSafetyAnalyzer {
         }
 
         public int tropismScore() {
-            return (enemyPiece.getPieceValue()/10) * distance;
+            return enemyPiece.getPieceValue()/10 * distance;
         }
 
     }
