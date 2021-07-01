@@ -25,7 +25,7 @@ import com.chess.engine.classic.pieces.Piece;
 import com.chess.engine.classic.pieces.Queen;
 import com.chess.engine.classic.pieces.Rook;
 
-public class TestPiecesTest {
+public class PiecesTest {
 
     @Test
     public void testMiddleQueenOnEmptyBoard() {

@@ -15,7 +15,7 @@ import com.chess.engine.classic.pieces.Bishop;
 import com.chess.engine.classic.pieces.King;
 import com.chess.engine.classic.pieces.Pawn;
 
-public class TestStaleMateTest {
+public class StaleMateTest {
     @Test
     public void testAnandKramnikStaleMate() {
 

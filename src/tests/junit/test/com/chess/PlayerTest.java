@@ -18,7 +18,7 @@ import com.chess.engine.classic.pieces.King;
 import com.chess.engine.classic.pieces.Rook;
 import com.chess.engine.classic.player.ai.StandardBoardEvaluator;
 
-public class TestPlayerTest {
+public class PlayerTest {
 
     @Test
     public void testSimpleEvaluation() {

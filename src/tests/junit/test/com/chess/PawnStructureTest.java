@@ -13,7 +13,7 @@ import com.chess.engine.classic.player.ai.PawnStructureAnalyzer;
 import com.chess.engine.classic.player.ai.StandardBoardEvaluator;
 import com.chess.pgn.FenUtilities;
 
-public class TestPawnStructureTest {
+public class PawnStructureTest {
 
     @Test
     public void testIsolatedPawnsOnStandardBoard() {

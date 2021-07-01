@@ -4,15 +4,15 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
-@Suite.SuiteClasses({junit.test.com.chess.TestPiecesTest.class,
+@Suite.SuiteClasses({PiecesTest.class,
                      BoardTest.class,
-                     junit.test.com.chess.TestStaleMateTest.class,
-                     junit.test.com.chess.TestPlayerTest.class,
+                     StaleMateTest.class,
+                     PlayerTest.class,
                      CheckmateTest.class,
                      MiniMaxTest.class,
                      AlphaBetaTest.class,
                      CastlingTest.class,
-                     junit.test.com.chess.TestPawnStructureTest.class,
+                     PawnStructureTest.class,
                      FENParserTest.class,
                      junit.test.com.chess.EngineTest.class
                      /*TestPGNParser.class*/})
