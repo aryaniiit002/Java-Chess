@@ -24,7 +24,7 @@ public class CastlingTestSD {
         board = Board.createStandardBoard();
     }
 
-    @When("^Calculate MoveTransition and apply assertion$")
+    @When("^Player make move$")
 	 public void processMoveTransition() {
          final MoveTransition t1 = board.currentPlayer()
                 .makeMove(Move.MoveFactory.createMove(board, BoardUtils.INSTANCE.getCoordinateAtPosition("e2"),
@@ -62,7 +62,7 @@ public class CastlingTestSD {
         moveTransitiont = t6.getToBoard().currentPlayer().makeMove(wm1);
 	 }
 
-	 @Then("^apply assertTrue on calculated MoveTransition$")
+	 @Then("^that move status now to be checked if successful or not$")
 	 public void confirmMT() {
         assertTrue(moveTransitiont.getMoveStatus().isDone());
 	 }
@@ -77,23 +77,23 @@ public class CastlingTestSD {
         assertFalse(moveTransitiont.getToBoard().whitePlayer().isKingSideCastleCapable());
      }
 
-     @And("^check white player's queen side castling$")
-	 public void testQueenSideCastling() {
+    @And("^check white player's queen side castling$")
+    public void testQueenSideCastling() {
         assertFalse(moveTransitiont.getToBoard().whitePlayer().isQueenSideCastleCapable());
-     }
+    }
 
-     @Given("^Given FEN Chess Board$")
+    @Given("^Given FEN Chess Board$")
     public void testNoCastlingOutOfCheck() {
         board = FenUtilities.createGameFromFEN("r3k2r/1pN1nppp/p3p3/3p4/8/8/PPPK1PPP/R6R b kq - 1 18");
     }
 
     @When("^Calculate illegal castle moves and moveTransition$")
-	 public void processMovetransition() {
+    public void processMovetransition() {
         final Move illegalCastleMove = Move.MoveFactory
                 .createMove(board, BoardUtils.INSTANCE.getCoordinateAtPosition("e8"), BoardUtils.INSTANCE.getCoordinateAtPosition("c8"));
         moveTransitiont = board.currentPlayer()
                 .makeMove(illegalCastleMove);
-	 }
+    }
 
 	 @Then("^apply assertTrue on calculated moveTransition$")
 	 public void testConfirmMT() {
