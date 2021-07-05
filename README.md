@@ -20,9 +20,27 @@ GUI inspired by: https://en.lichess.org/
 
 ## Testing Methods
 
-#### Test-driven development
-#### Behaviour-Driven Development  
-{work In Progress}
+### Test-driven development   
+[TDD](https://www.browserstack.com/guide/what-is-test-driven-development)     
+Test Driven Development (TDD) is a process of modifying the code in order to pass a test designed previously. It more emphasis on production code rather than test case design.
+
+[TDD Tests](https://github.com/aryaniiit002/Java-Chess/tree/master/src/tests/junit/test/com/chess)     
+
+### Behaviour-Driven Development      
+[BDD](https://www.froglogic.com/squish/features/bdd-behavior-driven-development-testing/)    
+Behaviour Driven Development (BDD) is a synthesis and refinement of practices stemming from Test Driven Development (TDD) and Acceptance Test Driven Development (ATDD).
+
+[BDD Tests](https://github.com/aryaniiit002/Java-Chess/tree/master/src/bddTest/java)
+
+### TDD vs BDD
+https://phoenixnap.com/blog/tdd-vs-bdd
+
+#### In simple words
+TDD is Test Driven Development means writing a test that fails because the specified functionality doesn't exist, then writing the simplest code that can make the test pass, then refactoring to remove duplication, etc. You repeat this Red-Green-Refactor loop over and over until you have a complete feature.
+
+BDD is Behavior Driven Development means creating an executable specification that fails because the feature doesn't exist, then writing the simplest code that can make the spec pass. You repeat this until a release candidate is ready to ship.
+
+Those seem pretty similar, right? They are. The key difference is the scope. TDD is a development practice while BDD is a team methodology. In TDD, the developers write the tests while in BDD the automated specifications are created by users or testers (with developers wiring them to the code under test.) For small, co-located, developer-centric teams, TDD and BDD are effectively the same.
 
 ## How it works?
 
