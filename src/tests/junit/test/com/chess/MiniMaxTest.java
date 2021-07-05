@@ -184,7 +184,7 @@ public class MiniMaxTest {
                         BoardUtils.INSTANCE.getCoordinateAtPosition("d7")));
         final MoveStrategy minMax = new MiniMax(1);
         minMax.execute(t1.getToBoard());
-        assertEquals(minMax.getNumBoardsEvaluated(), 45);
+        assertEquals(minMax.getNumBoardsEvaluated(), 14);
     }
 
     @Test
