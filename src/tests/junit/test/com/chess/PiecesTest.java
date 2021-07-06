@@ -1,5 +1,6 @@
 package junit.test.com.chess;
 
+import static com.chess.engine.classic.board.Board.*;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertTrue;
 import static junit.framework.TestCase.assertFalse;
@@ -29,7 +30,7 @@ public class PiecesTest {
 
     @Test
     public void testMiddleQueenOnEmptyBoard() {
-        final Board.Builder builder = new Board.Builder();
+        final Builder builder = new Builder();
         // Black Layout
         builder.setPiece(new King(Alliance.BLACK, 4, false, false));
         // White Layout
@@ -73,7 +74,7 @@ public class PiecesTest {
     @Test
     public void testLegalMoveAllAvailable() {
 
-        final Board.Builder boardBuilder = new Board.Builder();
+        final Builder boardBuilder = new Builder();
         // Black Layout
         boardBuilder.setPiece(new King(Alliance.BLACK, 4, false, false));
         boardBuilder.setPiece(new Knight(Alliance.BLACK, 28));
@@ -111,7 +112,7 @@ public class PiecesTest {
         assertTrue(whiteLegals.contains(wm7));
         assertTrue(whiteLegals.contains(wm8));
 
-        final Board.Builder boardBuilder2 = new Board.Builder();
+        final Builder boardBuilder2 = new Builder();
         // Black Layout
         boardBuilder2.setPiece(new King(Alliance.BLACK, 4, false, false));
         boardBuilder2.setPiece(new Knight(Alliance.BLACK, 28));
@@ -154,7 +155,7 @@ public class PiecesTest {
 
     @Test
     public void testKnightInCorners() {
-        final Board.Builder boardBuilder = new Board.Builder();
+        final Builder boardBuilder = new Builder();
         boardBuilder.setPiece(new King(Alliance.BLACK, 4, false, false));
         boardBuilder.setPiece(new Knight(Alliance.BLACK, 0));
         boardBuilder.setPiece(new Knight(Alliance.WHITE, 56));
@@ -182,7 +183,7 @@ public class PiecesTest {
 
     @Test
     public void testMiddleBishopOnEmptyBoard() {
-        final Board.Builder builder = new Board.Builder();
+        final Builder builder = new Builder();
         // Black Layout
         builder.setPiece(new King(Alliance.BLACK, 4, false, false));
         // White Layout
@@ -212,7 +213,7 @@ public class PiecesTest {
 
     @Test
     public void testTopLeftBishopOnEmptyBoard() {
-        Board.Builder builder = new Board.Builder();
+        Builder builder = new Builder();
         // Black Layout
         builder.setPiece(new King(Alliance.BLACK, 4, false, false));
         // White Layout
@@ -246,7 +247,7 @@ public class PiecesTest {
 
     @Test
     public void testTopRightBishopOnEmptyBoard() {
-        Board.Builder builder = new Board.Builder();
+        Builder builder = new Builder();
         // Black Layout
         builder.setPiece(new King(Alliance.BLACK, 4, false, false));
         // White Layout
@@ -278,7 +279,7 @@ public class PiecesTest {
 
     @Test
     public void testBottomLeftBishopOnEmptyBoard() {
-        Board.Builder builder = new Board.Builder();
+        Builder builder = new Builder();
         // Black Layout
         builder.setPiece(new King(Alliance.BLACK, 4, false, false));
         // White Layout
@@ -310,7 +311,7 @@ public class PiecesTest {
 
     @Test
     public void testBottomRightBishopOnEmptyBoard() {
-        Board.Builder builder = new Board.Builder();
+        Builder builder = new Builder();
         // Black Layout
         builder.setPiece(new King(Alliance.BLACK, 4, false, false));
         // White Layout
@@ -342,7 +343,7 @@ public class PiecesTest {
 
     @Test
     public void testMiddleRookOnEmptyBoard() {
-        final Board.Builder builder = new Board.Builder();
+        final Builder builder = new Builder();
         // Black Layout
         builder.setPiece(new King(Alliance.BLACK, 4, false, false));
         // White Layout
@@ -385,7 +386,7 @@ public class PiecesTest {
 
     @Test
     public void testPawnPromotion() {
-        final Board.Builder builder = new Board.Builder();
+        final Builder builder = new Builder();
         // Black Layout
         builder.setPiece(new Rook(Alliance.BLACK, 3));
         builder.setPiece(new King(Alliance.BLACK, 22, false, false));
@@ -409,7 +410,7 @@ public class PiecesTest {
 
     @Test
     public void testSimpleWhiteEnPassant() {
-        final Board.Builder builder = new Board.Builder();
+        final Builder builder = new Builder();
         // Black Layout
         builder.setPiece(new King(Alliance.BLACK, 4, false, false));
         builder.setPiece(new Pawn(Alliance.BLACK, 11));
@@ -439,7 +440,7 @@ public class PiecesTest {
 
     @Test
     public void testSimpleBlackEnPassant() {
-        final Board.Builder builder = new Board.Builder();
+        final Builder builder = new Builder();
         // Black Layout
         builder.setPiece(new King(Alliance.BLACK, 4, false, false));
         builder.setPiece(new Pawn(Alliance.BLACK, 11));
@@ -472,7 +473,7 @@ public class PiecesTest {
 
     @Test
     public void testEnPassant2() {
-        final Board board = Board.createStandardBoard();
+        final Board board = createStandardBoard();
         final Move m1 = Move.MoveFactory.createMove(board, BoardUtils.INSTANCE.getCoordinateAtPosition(
                 "e2"), BoardUtils.INSTANCE.getCoordinateAtPosition("e3"));
         final MoveTransition t1 = board.currentPlayer().makeMove(m1);
@@ -493,15 +494,15 @@ public class PiecesTest {
 
     @Test
     public void testKingEquality() {
-        final Board board = Board.createStandardBoard();
-        final Board board2 = Board.createStandardBoard();
+        final Board board = createStandardBoard();
+        final Board board2 = createStandardBoard();
         assertEquals(board.getPiece(60), board2.getPiece(60));
         assertFalse(board.getPiece(60).equals(null));
     }
 
     @Test
     public void testHashCode() {
-        final Board board = Board.createStandardBoard();
+        final Board board = createStandardBoard();
         final Set<Piece> pieceSet = Sets.newHashSet(board.getAllPieces());
         final Set<Piece> whitePieceSet = Sets.newHashSet(board.getWhitePieces());
         final Set<Piece> blackPieceSet = Sets.newHashSet(board.getBlackPieces());
